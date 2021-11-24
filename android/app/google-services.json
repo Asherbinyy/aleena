@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "136476604391",
+    "project_id": "aleena-c1360",
+    "storage_bucket": "aleena-c1360.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136476604391:android:8e736a4ee155cab8636f42",
+        "android_client_info": {
+          "package_name": "com.crazyidea.aleena.aleena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136476604391-rnqkolieqrj4sre85b8h2qpt81dqsoak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEPEo7gD88-8zmscVhNLSgYDUxjLSsv18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136476604391-rnqkolieqrj4sre85b8h2qpt81dqsoak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
