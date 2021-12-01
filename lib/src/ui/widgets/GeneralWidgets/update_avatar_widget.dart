@@ -18,90 +18,79 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class UpdateAvatarWidget extends StatefulWidget {
   final String avatar;
+
   const UpdateAvatarWidget({
-     this.avatar='',
+    this.avatar = '',
     Key? key,
   }) : super(key: key);
+
   @override
   State<UpdateAvatarWidget> createState() => _UpdateAvatarWidgetState();
 }
-class _UpdateAvatarWidgetState extends State<UpdateAvatarWidget> {
-  UpdateShopAvatar _updateShopAvatar = Get.put(UpdateShopAvatar());
-  File _image = File('xxx');
-  final picker = ImagePicker();
-  Future getImage() async {
-    await picker.getImage(source: ImageSource.gallery).then((value) async {
-      setState(() {
-        if (value != null) {
-          _image = File(value.path);
-        } else {
-          print('No image selected.');
-        }
-      });
-      print("_image $_image");
-      _updateShopAvatar.updateImage(image: _image);
-      // await Provider.of<UserInfoProvider>(context, listen: false).updateImage(image: File(value.path));
-    });
-  }
 
+class _UpdateAvatarWidgetState extends State<UpdateAvatarWidget> {
   @override
   Widget build(BuildContext context) {
-    print("_image in build widget $_image");
-    return Container(
-      width: 122.h,
-      height: 122.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100.r),
-        color: kCBackGroundColor,
-      ),
-      child: Stack(
-        children: [
-          widget.avatar==null?
-          _image!= File('xxx')?  ClipRRect(
-            borderRadius: BorderRadius.circular(777.r),
-            child: Image.file(
-              _image,
-              fit: BoxFit.fill,
-              width: double.infinity,
-              height: 188.h,
-            ),
-          ):
-          Center(
-            child: Image.asset(
-              'assets/icons/photoicon.png',
-              height: 51.h,
-            ),
-          ) :ClipRRect(
-              borderRadius: BorderRadius.circular(777.r),child:
-          ImageNetwork(url: widget.avatar, width: 122.h, height: 122.h)),
-          GestureDetector(
-            onTap: ()async{
-             await getImage();
-             },
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                width: 30.h,
-                height: 30.h,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.r),
-                    color: KCSeconary,
-                    border: Border.all(color: Colors.white,width: 2)
-                ),
-                child: Center(
-                  child: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 13.h,
+    UpdateShopAvatar _updateShopAvatar = Get.put(UpdateShopAvatar());
+
+    return GetBuilder<UpdateShopAvatar>(
+      builder: (_) => Container(
+        width: 122.h,
+        height: 122.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100.r),
+          color: kCBackGroundColor,
+        ),
+        child: Stack(
+          children: [
+            widget.avatar.isEmpty
+                ? _.image != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(777.r),
+                        child: Image.file(
+                          _.image!,
+                          fit: BoxFit.fill,
+                          width: double.infinity,
+                          height: 188.h,
+                        ),
+                      )
+                    : Center(
+                        child: Image.asset(
+                          'assets/icons/photoicon.png',
+                          height: 51.h,
+                        ),
+                      )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(777.r),
+                    child: ImageNetwork(
+                        url: widget.avatar, width: 122.h, height: 122.h)),
+            GestureDetector(
+              onTap: () async {
+                await _.getImage();
+              },
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Container(
+                  width: 30.h,
+                  height: 30.h,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.r),
+                      color: KCSeconary,
+                      border: Border.all(color: Colors.white, width: 2)),
+                  child: Center(
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 13.h,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -23,10 +23,8 @@ class HowAreWeController extends GetxController{
   List<QuestionsModel> get howAreWeList => _howAreWeList;
   RequestStatus status= RequestStatus.initial;
   HowAreWeRepository _howAreWeRepository = HowAreWeRepository();
-  Future<void> fetchHowAreWe({bool refresh=false})async{
-    if(!refresh){
+  Future<void> fetchHowAreWe()async{
       status = RequestStatus.loading;
-    }
     update();
     var response = await _howAreWeRepository.fetchHowAreWe();
     if (response.statusCode == 200 && response.data["status"] == true) {

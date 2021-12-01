@@ -1,10 +1,10 @@
 mixin ApiKey{
-   static const String apiBaseUrl='http://dondorma.crazyideaco.com/public/alayna/public/api/shops/';
+   static const String apiBaseUrl='https://3leena.com/public/api/shops/';
 
    final String URLLogin = apiBaseUrl + "login";
    final String URLRegister = apiBaseUrl + "sign-up";
    final String URLRegisterInfo = apiBaseUrl + "setInfo";
-   final String uRLSetRate = apiBaseUrl + "set_rate";
+   final String uRLSetRate = apiBaseUrl + "rateOrder";
    final String URLCheckPhone = apiBaseUrl + "check_phone";
    final String URLResetPassword = apiBaseUrl + "reset_password";
    final String URLSetLocation = apiBaseUrl + "Address";
@@ -21,8 +21,10 @@ mixin ApiKey{
    final String uRLChangePassword = apiBaseUrl + "change_password";
    final String uRLNotifications = apiBaseUrl + "notifications";
    final String uRLLogOut = apiBaseUrl + "log_out";
-   final String uRLHowAreWe = apiBaseUrl + "about";
+   final String uRLHowAreWe = apiBaseUrl + "aboutus";
    final String uRLPrivacyAndTerms = apiBaseUrl + "privacy";
    final String uRLCity = apiBaseUrl + "city";
    final String uRLArea = apiBaseUrl + "cityarea";
+   final String uRLLastOrder = apiBaseUrl + "lastOrder";
+   final String uRLDeleteOrder = apiBaseUrl + "Order";
 }

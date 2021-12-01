@@ -3,24 +3,24 @@ import 'package:aleena/src/bloc/models/order.dart';
 
 class NotificationsModel {
   NotificationsModel({
-    required this.id,
-    required this.type,
-    required this.msg,
-    required this.date,
-    required this.time,
-    required this.deliveryImage,
-    required this.deliveryName,
-    required this.order,
+     this.id,
+     this.type,
+     this.msg,
+     this.date,
+     this.time,
+     this.deliveryImage,
+     this.deliveryName,
+     this.order,
     this.status,
   });
-  late final int id;
-  late final String type;
-  late final String msg;
-  late final String date;
-  late final String time;
-  late final String deliveryImage;
-  late final String deliveryName;
-  late final Order order;
+  late final int? id;
+  late final String? type;
+  late final String? msg;
+  late final String? date;
+  late final String? time;
+  late final String? deliveryImage;
+  late final String? deliveryName;
+  late final Order? order;
   late final int? status;
 
   NotificationsModel.fromJson(Map<String, dynamic> json){

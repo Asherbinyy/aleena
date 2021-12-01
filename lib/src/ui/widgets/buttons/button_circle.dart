@@ -32,3 +32,34 @@ class ButtonCircle extends StatelessWidget {
     );
   }
 }
+
+
+class ButtonCircleIcons extends StatelessWidget {
+  final VoidCallback? onTap;
+  final IconData? icon;
+
+  ButtonCircleIcons({this.onTap,this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap??(){
+
+      },
+      child: Container(
+        height: 27.h,
+        width: 27.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.r),
+          color: KCSeconary,
+        ),
+        child: Center(
+          child: Icon(icon,
+            color: Colors.white,
+            size: 16.sp,
+          )
+        ),
+      ),
+    );
+  }
+}

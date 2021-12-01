@@ -3,6 +3,7 @@ import 'package:aleena/src/core/utils/extensions.dart';
 import 'package:aleena/src/features/NotificatoinsFeature/Bloc/model/notification_model.dart';
 import 'package:aleena/src/ui/widgets/GeneralWidgets/custom_text.dart';
 import 'package:aleena/src/ui/widgets/buttons/button_default.dart';
+import 'package:aleena/src/ui/widgets/dialogs/sheet_rate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +34,7 @@ final NotificationsModel notificationsModel ;
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText(text:notificationsModel.msg,),
+                  CustomText(text:notificationsModel.msg,fontW: FW.bold,fontSize: 18,),
                   SizedBox(
                     // constraints: BoxConstraints(maxWidth: 200.w),
                     width:  200.w,
@@ -49,7 +50,9 @@ final NotificationsModel notificationsModel ;
             height: 30,
             radius: 15,
             title:notificationsModel.status==1||notificationsModel.status==1? 'show_'.tr:"rate_".tr,
-            onTap: (){},
+            onTap: (){
+              Get.bottomSheet(SheetRate(order:notificationsModel.order), isScrollControlled: true);
+            },
           ),
         ],
       ),

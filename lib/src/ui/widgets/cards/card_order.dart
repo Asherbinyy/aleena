@@ -1,5 +1,6 @@
 import 'package:aleena/src/bloc/models/order.dart';
 import 'package:aleena/src/core/constants/color_constants.dart';
+import 'package:aleena/src/features/HomeFeature/bloc/controller/delete_order_controller.dart';
 import 'package:aleena/src/ui/widgets/GeneralWidgets/custom_text.dart';
 import 'package:aleena/src/ui/widgets/buttons/button_circle.dart';
 import 'package:aleena/src/ui/widgets/titles/title_card_order.dart';
@@ -9,11 +10,11 @@ import '/src/core/utils/extensions.dart';
 import 'package:get/get.dart';
 class CardOrder extends StatelessWidget {
   final Order order;
-
-  CardOrder({required this.order});
-
+  final bool isCall;
+  CardOrder({required this.order,this.isCall=false});
   @override
   Widget build(BuildContext context) {
+    DeleteOrderController _deleteOrderController =Get.put(DeleteOrderController());
     return Container(
       width: 343.w,
       decoration: BoxDecoration(
@@ -37,15 +38,17 @@ class CardOrder extends StatelessWidget {
                   fontW: FW.medium,
                 ),
                 Spacer(),
-                ButtonCircle(icon: 'locationicon.png',onTap: (){},),
+                // ButtonCircle(icon: 'locationicon.png',onTap: (){},),
                 6.0.ESW(),
-                ButtonCircle(icon: 'phone.png',onTap: (){},),
+                ButtonCircleIcons(icon: Icons.delete_forever,onTap: (){
+                  print("delete order id ${order.id}");
+                  _deleteOrderController.deleteOrder(orderId: order.id!);
+                },),
               ],
             ),
             8.0.ESH(),
             TitleCardOrder(
               title: '${"clint_name".tr} : ',
-
               subtitle: order.clientName,
             ),
             8.0.ESH(),

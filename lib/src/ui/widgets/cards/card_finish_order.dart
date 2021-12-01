@@ -12,11 +12,14 @@ import 'package:get/get.dart';
 import '/src/core/utils/extensions.dart';
 
 class CardFinishOrder extends StatelessWidget {
-  final VoidCallback? onReview;
+  final VoidCallback? onReviewTap;
+  final VoidCallback? onCallTap;
   final Order? order;
   final bool isHome;
+  final bool isRate;
 
-  CardFinishOrder({this.onReview, this.order, this.isHome = false});
+
+  CardFinishOrder({this.onReviewTap,this.onCallTap , this.order, this.isHome = false, this.isRate=false});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,9 @@ class CardFinishOrder extends StatelessWidget {
             children: [
               DeliveryOrderCard(
                 order: order,
-                onTap: onReview ?? () {},
+                onRateTap: onReviewTap ?? () {},
+                onCallTap: onCallTap??(){},
+                isRate: isRate,
               ),
               16.0.ESW(),
               Divider(),
@@ -94,7 +99,7 @@ class CardFinishOrder extends StatelessWidget {
                         title: 'confirm_delivery'.tr,
                         onTap: (){
                           Get.bottomSheet(
-                            SheetQr(),
+                            SheetQr(qr: order!.qrCode.toString(),),
                           );
                         },
                       ),

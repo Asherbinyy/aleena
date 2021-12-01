@@ -1,17 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.crazyidea.aleena.aleena">
+    package="com.crazyidea.alyna.clint">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application
-        android:label="aleena"
+        android:label="Alyna"
         android:icon="@mipmap/ic_launcher">
        <meta-data android:name="com.google.android.gms.version"
            android:value="@integer/google_play_services_version" />
        <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyBsFF1MC7M0Asa6MkWdyVD386Bm6mCzS8s"/>
-
+           android:value="AIzaSyARTvBvDfC6YThuli3t5oBRst0yVv_wftA"/>
        <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

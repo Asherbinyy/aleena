@@ -23,8 +23,7 @@ class RegisterScreen extends StatelessWidget {
         needAppBar: false,
         child: GetBuilder<RegisterController>(
           builder: (_) =>  KeyboardVisibilityBuilder(
-            builder: (context, isKeyboardVisible) => Stack(
-              children: [
+            builder: (context, isKeyboardVisible) =>
                 SingleChildScrollView(
                   child: Column(
                     children: [
@@ -41,10 +40,10 @@ class RegisterScreen extends StatelessWidget {
                                 )
                             ),
                             TextFieldDefault(
-                              hint: 'personal_name'.tr,
-                              errorText: "must_enter_personal_name".tr,
+                              hint: 'Trade_name'.tr,
+                              errorText: "must_enter_trade_name".tr,
                               controller: _.nameController,
-                              upperTitle: 'personal_name'.tr,
+                              upperTitle: 'Trade_name'.tr,
                               // keyboardType: TextInputType.phone,
                               // validation: phoneValidator,
                               onComplete: () {
@@ -97,33 +96,33 @@ class RegisterScreen extends StatelessWidget {
                               },
 
                             ),
-                            100.0.ESH(),
+                            24.0.ESH(),
+                            isKeyboardVisible?
+                            0.0.ESH():
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                padding:  EdgeInsets.only(
+                                    bottom: 20.h
+                                ),
+                                child: Container(
+                                    child: TitleTwoInLine(
+                                      tile: 'have_account?'.tr,
+                                      secondTile: 'sign_in'.tr,
+                                      onTap: (){
+                                        _.moveToLogin();
+                                      },
+                                    )),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
                 ),
-                isKeyboardVisible?
-                0.0.ESH():
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding:  EdgeInsets.only(
-                        bottom: 20.h
-                    ),
-                    child: Container(
-                        child: TitleTwoInLine(
-                          tile: 'have_account?'.tr,
-                          secondTile: 'sign_in'.tr,
-                          onTap: (){
-                            _.moveToLogin();
-                          },
-                        )),
-                  ),
-                ),
-              ],
-            ),
+
+
           ),
         ),
       )

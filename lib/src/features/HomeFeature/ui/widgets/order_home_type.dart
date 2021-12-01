@@ -9,7 +9,6 @@ class OrderTypeChoice extends StatelessWidget {
   final int status;
   final Function(int)? onTap;
   OrderTypeChoice({this.status=0,this.onTap});
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,6 +16,7 @@ class OrderTypeChoice extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: Color(0xffEEEEF0),
+        // color: Colors.amber,
       ),
       child: Padding(
         padding:  EdgeInsets.symmetric(
@@ -39,7 +39,7 @@ class OrderTypeChoice extends StatelessWidget {
                   child: Center(
                     child: CustomText(
                       text: 'waiting_'.tr,
-                      color:  status==0?KCMainBlack:Color(0xff858585),
+                      color:  status==0?KCMain:Color(0xff858585),
                       fontSize: 14,
                       fontW: FW.medium,
                     ),
@@ -61,7 +61,29 @@ class OrderTypeChoice extends StatelessWidget {
                   child: Center(
                     child: CustomText(
                       text: 'take_away'.tr,
-                      color:  status==1?KCMainBlack:Color(0xff858585),
+                      color:  status==1?KCSeconary:Color(0xff858585),
+                      fontSize: 14,
+                      fontW: FW.medium,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: (){
+                  onTap!(2);
+                },
+                child: Container(
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.r),
+                    color: status==2?Colors.white:Colors.transparent,
+                  ),
+                  child: Center(
+                    child: CustomText(
+                      text: 'on_way'.tr,
+                      color:  status==2?KCMainGreen:Color(0xff858585),
                       fontSize: 14,
                       fontW: FW.medium,
                     ),

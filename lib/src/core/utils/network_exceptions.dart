@@ -34,5 +34,5 @@ class ServerSideException extends NetworkException {
 
 
 class UnKnownException extends NetworkException {
-  UnKnownException([String? message]) : super(message!, "Server sidee: ");
+  UnKnownException([String? message]) : super(message!, "Server side: ");
 }

@@ -34,7 +34,7 @@ class SetAvatarController extends GetxController {
   Future<void> updateImage({required File image})async{
     String apiToken = await box.read('token')??box.read('alternativeـapi_token')??' ';
     var uri =
-    Uri.parse("https://dondorma.crazyideaco.com/public/alayna/public/api/shops/updateInfo");
+    Uri.parse("https://3leena.com/public/api/shops/updateInfo");
     var request = http.MultipartRequest("POST", uri);
     var stream = new http.ByteStream(DelegatingStream.typed(image.openRead()));
     var length = await image.length();

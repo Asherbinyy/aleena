@@ -23,7 +23,7 @@ class LogOutController extends GetxController{
         print("convert operation success");
         status = RequestStatus.done;
         update();
-        customSnackBar(title: "Down_".tr,subtitle:  response.data['message']??' ');
+        customSnackBar(title: "Done_".tr,subtitle:  response.data['message']??' ');
       }else{
         status = RequestStatus.done;
         update();

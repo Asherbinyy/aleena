@@ -2,15 +2,22 @@ import 'package:aleena/src/bloc/models/order.dart';
 import 'package:aleena/src/core/constants/color_constants.dart';
 import 'package:aleena/src/ui/widgets/GeneralWidgets/custom_text.dart';
 import 'package:aleena/src/ui/widgets/GeneralWidgets/image_network.dart';
+import 'package:aleena/src/ui/widgets/buttons/button_circle.dart';
 import 'package:aleena/src/ui/widgets/buttons/button_rate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '/src/core/utils/extensions.dart';
 import 'package:get/get.dart';
+
 class DeliveryOrderCard extends StatelessWidget {
+  final bool isRate;
   final Order? order;
-  final VoidCallback? onTap;
-  DeliveryOrderCard({this.onTap, this.order});
+  final VoidCallback? onRateTap;
+  final VoidCallback? onCallTap;
+
+  DeliveryOrderCard(
+      {this.onRateTap, this.onCallTap, this.order, this.isRate = false});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,10 +56,14 @@ class DeliveryOrderCard extends StatelessWidget {
               ),
             ],
           ),
-          Spacer(),
-          ButtonRate(
-            onTap: onTap ?? () {},
-          ),
+          const Spacer(),
+          isRate
+              ? ButtonRate(
+                  onTap: onRateTap ?? () {},
+                )
+              : ButtonCircle(
+                  icon: 'phone.png',
+                  onTap: onCallTap ?? () {},),
         ],
       ),
     );

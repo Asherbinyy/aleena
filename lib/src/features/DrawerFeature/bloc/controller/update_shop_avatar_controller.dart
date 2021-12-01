@@ -32,28 +32,59 @@ class UpdateShopAvatar extends GetxController {
   GetStorage box = GetStorage();
 
   Future<void> updateImage({required File image})async{
-    String apiToken = await box.read('token')??box.read('alternativeـapi_token')??' ';
+    print("Step image 1");
+    String apiToken =box.read('apiToken')??"";
+    print("Step image 2");
+    print("apiToken image $apiToken");
     var uri =
-    Uri.parse("https://dondorma.crazyideaco.com/public/alayna/public/api/shops/updateInfo");
+    Uri.parse("https://3leena.com/public/api/shops/updateInfo");
     var request = http.MultipartRequest("POST", uri);
     var stream = new http.ByteStream(DelegatingStream.typed(image.openRead()));
     var length = await image.length();
     var multipartFile1 = new http.MultipartFile('image', stream, length, filename: basename(image.path), contentType: new MediaType('image', 'png'));
+    print("Step image 3");
     request.files.add(multipartFile1);
+    print("Step image 4");
     request.headers.addAll({
       'Authorization' : 'Bearer ' + apiToken,
       // 'Authorization': 'Bearer ' +
       //     "\$2y\$10\$xgbMGXS9hMxvp0QB8yTVXODPxG0dl8DQPG7yUhrhqCv3OVBBjFGNq",
     });
+    print("Step image 5");
     var response = await request.send();
+    print("Step image 6");
+    print("response image ${response.statusCode}");
     if (response.statusCode == 200) {
+      print("Step image 7");
       var res = await response.stream.bytesToString();
+      print("Step image 8");
       var data = jsonDecode(res);
+      print("Step image 9");
       await box.write("avatarShop", data['data']['image']);
       print("avatarShop>>>>>>>>>:-> ${ data['data']['image']}");
       return ;
     } else if (response.statusCode == 401) {
+      print("Step image -0");
       return ;
     }
   }
+
+
+  File? _image ;
+  File? get image => _image;
+  final picker = ImagePicker();
+  Future getImage() async {
+    await picker.getImage(source: ImageSource.gallery).then((value) async {
+      if (value != null) {
+        _image = File(value.path);
+        update();
+      } else {
+        print('No image selected.');
+      }
+      print("_image in controller $_image");
+      updateImage(image: _image!);
+      // await Provider.of<UserInfoProvider>(context, listen: false).updateImage(image: File(value.path));
+    });
+  }
+
 }

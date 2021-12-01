@@ -18,6 +18,7 @@ class RegisterInfoScreen extends StatelessWidget {
     var node = FocusScope.of(context);
     return Scaffold(
       body: ScaffoldBackground(
+        needAppBar: false,
         child: SingleChildScrollView(
           child: GetBuilder<RegisterInfoController>(
             builder: (_) =>  Form(
@@ -87,7 +88,7 @@ class RegisterInfoScreen extends StatelessWidget {
                         _.commercialRegisterImage!,
                         width: double.infinity,
                         height: double.infinity,
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       )
 
                     ),

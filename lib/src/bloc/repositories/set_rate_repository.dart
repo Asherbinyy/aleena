@@ -12,7 +12,7 @@ import 'package:get_storage/get_storage.dart';
 class SetRateRepository with ApiKey{
   // GetStorage box = GetStorage();
   NetworkService _networkService = NetworkService();
-  Future<Response> setRate({required String rate , required String title,required String id})async{
+  Future<Response> setRate({required String rate , required String title,required int id})async{
     Response response;
     try{
       response = await _networkService.post(
@@ -20,8 +20,8 @@ class SetRateRepository with ApiKey{
           auth: true,
           body: {
             'rate':    rate,
-            'title': title,
-            'id':     id,
+            'note': title,
+            'order_id':     id,
           }
       );
     }on SocketException{

@@ -8,6 +8,10 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '/src/core/utils/extensions.dart';
 
 class SheetQr extends StatelessWidget {
+  final String qr;
+
+  SheetQr({required this.qr});
+
   @override
   Widget build(BuildContext context) {
     SetRateController _setRateController = Get.put(SetRateController());
@@ -36,7 +40,7 @@ class SheetQr extends StatelessWidget {
                   32.0.ESH(),
                   Center(
                     child: QrImage(
-                      data: "1151111",
+                      data: qr,
                       version: QrVersions.auto,
                       size: 288.sp,
                     ),

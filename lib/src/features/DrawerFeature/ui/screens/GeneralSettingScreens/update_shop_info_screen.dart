@@ -67,28 +67,11 @@ class _UpdateShopInfoScreenState extends State<UpdateShopInfoScreen> {
     super.dispose();
   }
 
-  File _image = File('xxx');
-  final picker = ImagePicker();
-
-  Future getImage() async {
-    await picker.getImage(source: ImageSource.gallery).then((value) async {
-      setState(() {
-        if (value != null) {
-          _image = File(value.path);
-        } else {
-          print('No image selected.');
-        }
-      });
-      print("_image $_image");
-      // await Provider.of<UserInfoProvider>(context, listen: false).updateImage(image: File(value.path));
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     print("widget.taxRegisterNumberImage ${widget.taxRegisterNumberImage}");
-    UpdateShopInfoController _updatePersonalInfoController =
-        Get.put(UpdateShopInfoController());
+    UpdateShopInfoController _updatePersonalInfoController = Get.put(UpdateShopInfoController());
     var node = FocusScope.of(context);
     return Scaffold(
       body: ScaffoldBackground(
@@ -167,7 +150,7 @@ class _UpdateShopInfoScreenState extends State<UpdateShopInfoScreen> {
                                   _.commercialRegisterImage!,
                                   width: double.infinity,
                                   height: double.infinity,
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
                                 )
                           : ClipRRect(
                               borderRadius: BorderRadius.circular(5.r),

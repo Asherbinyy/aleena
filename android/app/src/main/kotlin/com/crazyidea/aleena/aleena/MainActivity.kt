@@ -1,4 +1,4 @@
-package com.crazyidea.aleena.aleena
+package com.crazyidea.alyna.clint
 
 import io.flutter.embedding.android.FlutterActivity
 

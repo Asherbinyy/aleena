@@ -32,6 +32,7 @@ class LoginController extends GetxController{
   VerifyPhoneController verifyPhoneController = Get.put(VerifyPhoneController());
   RegisterLocationController registerLocationController = Get.put(RegisterLocationController());
   void submit() async{
+    print("step 1 ");
     if(globalKey.currentState!.validate()){
       globalKey.currentState!.save();
       setLoading();
@@ -39,17 +40,27 @@ class LoginController extends GetxController{
       print('my phone is ${phoneController!.value.text}');
       print('my phone is ${passwordController!.value.text}');
       String phone = phoneController!.value.text;
+      print("step 2 ");
       if(phoneController!.value.text.isNotEmpty){
+        print("step 3 ");
         if(phoneController!.value.text.startsWith('0')){
           phone = phoneController!.value.text.replaceFirst('0','');
+          print("step 4 ");
         }
       }
-      var response = await _loginRepository.login(phone: phoneController!.text,password: passwordController!.text);
+      print("step 4+ ");
+
+      var response = await _loginRepository.login(phone: phoneController!.value.text,password: passwordController!.value.text);
+      print("step 4++ ");
       Get.back();
       if (response.statusCode == 200 && response.data["status"] == true) {
+        print("step 5 ");
         print("request operation success");
         if(response.data['data']!=null){
           box.write('alternativeـapi_token',response.data['data']['token']);
+          box.write('apiToken',response.data['data']['token']);
+          box.write('name',response.data['data']['name']);
+          box.write('avatarShop',response.data['data']['image']);
           box.write('apiToken',response.data['data']['token']);
           if(response.data['data']['phone_verify']!=1){
             PhoneVerifyController.verifyPhone(phone: phoneController!.text,onSuccess: ()async{

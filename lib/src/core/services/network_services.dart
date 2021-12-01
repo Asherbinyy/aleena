@@ -9,20 +9,18 @@ import 'package:get_storage/get_storage.dart';
 
 
 class NetworkService with ApiKey{
-
-  // Dio dio = Dio();
-
   Dio dio = Dio();
   GetStorage box = GetStorage();
 
-  String getMyToken(){
-    return box.read('token')??box.read('alternativeـapi_token')??' ';
-  }
+  // String getMyToken(){
+  //   return box.read('token')??box.read('alternativeـapi_token')??' ';
+  // }
+
   Future<Response> get({@required String? url, Map<String , String>? headers,bool auth = false}) async {
     Response? response;
-    String apiToken =box.read('apiToken');
+    String apiToken =box.read('apiToken')??"";
     // String apiTokenStatic ="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiMGEwOGVkNzFkOTRlODczYzBjYjhmYTdlZmQyMDk5ZTAzZDZiNGZmMDEyZDQ2NDBjNjZjN2FhZTFlM2VjNmUwZjI1NDBmMzYxZjc3M2IxYzciLCJpYXQiOjE2Mzc2NTY3ODQuNDMxNzc4LCJuYmYiOjE2Mzc2NTY3ODQuNDMxNzg5LCJleHAiOjE2NjkxOTI3ODQuNDIwMzg3LCJzdWIiOiIxOSIsInNjb3BlcyI6WyJzaG9wcyJdfQ.uNG5jsWdF0JG1H2A3eMRsVEGFmCV-kzIxG6H_ovRHI85f0pFKGoC58bA5my_MiNgiQznHRwhdsvpCc0XPRcDNr3f8hGuRQT-zraKUbn7CMXE2y_JOiH-4PQRpIT0J1A6RkAKMuwcWRx8NePgpBC_sxYsm95O91CZZNS7Cs5OvYJIaeaXYfv7kMBSt5hrbyXDUQBmwHJdd90Dtr-LwFK0ZnYeDwbquTNwhC3oJHj4KA1Zi2u8mDBB2M6UrujiOjpirzUeo3DuYDEHOdNWw2rFKu0bY9t0A7iM6ZZWbZdjPG-abell9eMAeNjbZ6DjbZAJJChAZLQwyGTaoOuV-cqxp2AHSCiTYlgCnDExkwTNxoVvXOLfD3JOGuovyYc8sSZ90K6JLMrX64YE3OstWDS-DrSQgMq1wzHqKpiyjHrMR9GscPPOfogP013_cwUFs7rsq5HqGs2nN_FjILpiAMLhU_EELzcdChgODn5vGFQupmQPoBK6uTYtZP_BQHreR5T9ebOeaui95jQGorfJjueXG5mSudjNrytIVh6k1Q8Pks9TqIGksM7rw44r-5p7jqPX5CZ2I7wOdRcNcK16YeMi3cyvrWymneQj5SbadxD4sF3Bl1DLcKxH7Evb-rGPXnrhnBvzvQGkRRRHaBnI8jidsp2iwC8jbCRmbnWhcY6VSL4";
-    print("apiToken in netWork >>>>>>>>>:-> $apiToken");
+    log("log apiToken in netWork >>>>>>>>>:-> $apiToken");
     try {
       dio.options.baseUrl = ApiKey.apiBaseUrl;
       response = await dio.get(url!, options: Options(
@@ -47,7 +45,7 @@ class NetworkService with ApiKey{
     Map<String , String>? headers, Map<String , dynamic>? body,bool auth = false}) async {
     // String apiTokenStatic ="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiMGEwOGVkNzFkOTRlODczYzBjYjhmYTdlZmQyMDk5ZTAzZDZiNGZmMDEyZDQ2NDBjNjZjN2FhZTFlM2VjNmUwZjI1NDBmMzYxZjc3M2IxYzciLCJpYXQiOjE2Mzc2NTY3ODQuNDMxNzc4LCJuYmYiOjE2Mzc2NTY3ODQuNDMxNzg5LCJleHAiOjE2NjkxOTI3ODQuNDIwMzg3LCJzdWIiOiIxOSIsInNjb3BlcyI6WyJzaG9wcyJdfQ.uNG5jsWdF0JG1H2A3eMRsVEGFmCV-kzIxG6H_ovRHI85f0pFKGoC58bA5my_MiNgiQznHRwhdsvpCc0XPRcDNr3f8hGuRQT-zraKUbn7CMXE2y_JOiH-4PQRpIT0J1A6RkAKMuwcWRx8NePgpBC_sxYsm95O91CZZNS7Cs5OvYJIaeaXYfv7kMBSt5hrbyXDUQBmwHJdd90Dtr-LwFK0ZnYeDwbquTNwhC3oJHj4KA1Zi2u8mDBB2M6UrujiOjpirzUeo3DuYDEHOdNWw2rFKu0bY9t0A7iM6ZZWbZdjPG-abell9eMAeNjbZ6DjbZAJJChAZLQwyGTaoOuV-cqxp2AHSCiTYlgCnDExkwTNxoVvXOLfD3JOGuovyYc8sSZ90K6JLMrX64YE3OstWDS-DrSQgMq1wzHqKpiyjHrMR9GscPPOfogP013_cwUFs7rsq5HqGs2nN_FjILpiAMLhU_EELzcdChgODn5vGFQupmQPoBK6uTYtZP_BQHreR5T9ebOeaui95jQGorfJjueXG5mSudjNrytIVh6k1Q8Pks9TqIGksM7rw44r-5p7jqPX5CZ2I7wOdRcNcK16YeMi3cyvrWymneQj5SbadxD4sF3Bl1DLcKxH7Evb-rGPXnrhnBvzvQGkRRRHaBnI8jidsp2iwC8jbCRmbnWhcY6VSL4";
     Response? response;
-    String apiToken =box.read('apiToken');
+    String apiToken =box.read('apiToken')??"";
     print("apiToken in netWork >>>>>>>>>:-> $apiToken");
     dio.options.baseUrl = ApiKey.apiBaseUrl;
     try {
@@ -80,7 +78,4 @@ class NetworkService with ApiKey{
       return response;
     }
   }
-
-
-
 }

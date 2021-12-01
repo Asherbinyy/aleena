@@ -13,11 +13,13 @@ import 'package:geolocator/geolocator.dart';
 
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class HomeController extends GetxController{
   List<Order> waitingOrders = [];
   List<Order> underDelivery = [];
+  List<Order> onWayDelivery = [];
   int _tabsIndex = 0;
   int get tabsIndex => _tabsIndex;
   set tabsIndex(int value) {
@@ -47,11 +49,15 @@ class HomeController extends GetxController{
       print("request operation success");
         waitingOrders.clear();
         underDelivery.clear();
+        onWayDelivery.clear();
         for (var item in response.data['waitingOrder']) {
            waitingOrders.add(Order.fromJson(item));
         }
         for (var item in response.data['underdeliveryOrder']) {
            underDelivery.add(Order.fromJson(item));
+        }
+        for (var item in response.data['onWayOrder']) {
+          onWayDelivery.add(Order.fromJson(item));
         }
 
       print("convert operation success");
@@ -62,7 +68,15 @@ class HomeController extends GetxController{
       update();
     }
   }
+  void deleteOrder(index){
+    waitingOrders.removeAt(index);
+    update();
+  }
 
+  void launchCall(command) async {
+    if (!await launch(command)) throw 'Could not launch $command';
+
+  }
 
   Future<void> gotoMap()async{
     setLoading();
@@ -71,11 +85,9 @@ class HomeController extends GetxController{
     Get.to(()=>MapScreen(
       targetPosition: position,
       onSave: (double lat , double lon , String address){
-        Get.to(()=>AddOrderScreen(address: address, lat: lat, lon: lon,));
+        Get.off(()=>AddOrderScreen(address: address, lat: lat, lon: lon,));
       },));
   }
-
-
 
   Future<LatLng?>? getMyLocation()async{
     await Geolocator.getCurrentPosition().then((value) {

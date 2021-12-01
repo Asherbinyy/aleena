@@ -48,6 +48,7 @@ class RegisterController extends GetxController{
         print("request operation success");
         if(response.data['data']!=null){
           box.write('alternativeـapi_token',response.data['data']['token']);
+          box.write('apiToken',response.data['data']['token']);
           print("apiToken in register >>>>>>>>>:-> ${box.read('alternativeـapi_token')}");
           PhoneVerifyController.verifyPhone(phone: phoneController!.text,onSuccess: ()async{
             await verifyPhoneController.verifyPhone();

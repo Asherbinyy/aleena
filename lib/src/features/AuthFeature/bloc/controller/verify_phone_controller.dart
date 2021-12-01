@@ -28,9 +28,11 @@ class VerifyPhoneController extends GetxController{
       print("request operation success");
       if(response.data['data']!=null){
         if(isRegister){
+          print("step v R 1");
           Get.offAll(RegisterInfoScreen());
         }else{
           Get.offAll(LoginScreen());
+          print("step v L 1");
         }
         // box.write('name',response.data['data']['name']??' ');
         // box.write('phone',response.data['data']['phone']??' ');

@@ -17,105 +17,150 @@ import 'package:get/get.dart';
 import '/src/core/utils/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class   HomeScreen extends StatelessWidget {
-  HomeController homeController = Get.put(HomeController());
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    RegisterLocationController registerLocationController = Get.put(RegisterLocationController());
-    return Scaffold(
-      drawer:  CustomDrawerScreen(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          // Get.to(()=>AddOrderScreen());
-          homeController.gotoMap();
-        },
-        backgroundColor: KCMain,
-        child: Center(
-          child: Image.asset(
-            'assets/icons/float.png',
-            color: Colors.white,
-            height: 29.h,
+    RegisterLocationController _registerLocationController =
+        Get.put(RegisterLocationController());
+    HomeController _homeController = Get.put(HomeController());
+
+    Future<void> onRefresh() async {
+      await _homeController.fetchHome(refresh: true);
+    }
+
+    return SafeArea(
+      child: Scaffold(
+        drawer: CustomDrawerScreen(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Get.to(()=>AddOrderScreen());
+            _homeController.gotoMap();
+          },
+          backgroundColor: KCMain,
+          child: Center(
+            child: Image.asset(
+              'assets/icons/float.png',
+              color: Colors.white,
+              height: 29.h,
+            ),
           ),
         ),
-      ),
-      body: GetBuilder<HomeController>(
-        builder: (_) => ScaffoldBackground(
-          child: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 16.0.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                22.0.ESH(),
-                CustomText(
-                  text: 'welcome_again'.tr,
-                  fontSize: 18,
-                  fontW: FW.medium,
-                  color: KCMainBlack,
-                ),
-                4.0.ESH(),
-                CustomText(
-                  text: 'add_more_order_and_see_it'.tr,
-                  fontSize: 15,
-                  fontW: FW.light,
-                  color: KCMainGrey,
-                ),
-                26.0.ESH(),
-                OrderTypeChoice(
-                  onTap: (index){
-                    _.tabIndex = index;
-                  },
-                  status: _.tabIndex,
-                ),
-                26.0.ESH(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: _.tabIndex==0 ? 'waiting_order'.tr: 'delivering_order'.tr,
-                      fontW: FW.bold,
-                      color: KCMainBlack,
-                      fontSize: 16,
-                    ),
-                    CustomText(
-                      text: (_.status == RequestStatus.done)? '(${_.tabIndex==0 ? _.waitingOrders.length : _.underDelivery.length} ${"order_".tr})':'',
-                      fontW: FW.bold,
-                      color: KCMainGrey,
-                      fontSize: 12,
-                    ),
-                  ],
-                ),
-                Expanded(
-                    child:
-                    _.status != RequestStatus.done?
-                        0.0.ESH():
-                    (_.tabIndex == 0 && _.waitingOrders.isEmpty || _.tabIndex == 1 && _.underDelivery.isEmpty)?
-                    Center(
-                      child: EmptyWidget(
-                        image: 'open.png',
-                        title: 'no_waiting_order'.tr,
-                        subtitle: 'no_delivering_order_add_order_first'.tr,
+        body: GetBuilder<HomeController>(
+          builder: (_) => ScaffoldBackground(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  22.0.ESH(),
+                  CustomText(
+                    text: 'welcome_again'.tr,
+                    fontSize: 18,
+                    fontW: FW.medium,
+                    color: KCMainBlack,
+                  ),
+                  4.0.ESH(),
+                  CustomText(
+                    text: 'add_more_order_and_see_it'.tr,
+                    fontSize: 15,
+                    fontW: FW.light,
+                    color: KCMainGrey,
+                  ),
+                  26.0.ESH(),
+                  OrderTypeChoice(
+                    onTap: (index) {
+                      _.tabIndex = index;
+                    },
+                    status: _.tabIndex,
+                  ),
+                  26.0.ESH(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: _.tabIndex == 0
+                            ? 'waiting_order'.tr
+                            : _.tabIndex == 1
+                                ? 'delivering_order'.tr
+                                : "on_way_order".tr,
+                        fontW: FW.bold,
+                        color: KCMainBlack,
+                        fontSize: 16,
                       ),
-                    ):
-                    RefreshIndicator(
-                      onRefresh: ()async{
-                        _.fetchHome(refresh: true);
-                      },
-                      child: ListView.separated(
-                          itemBuilder: (context, index) => _.tabIndex==0 ?
-                          CardOrder(order: _.waitingOrders[index],) :
-                          CardFinishOrder(
-                            order: _.underDelivery[index],isHome: true,
-                            onReview: (){
-                              Get.bottomSheet(SheetRate(order:_.underDelivery[index]), isScrollControlled: true);
-                            },
-                          ),
-                          separatorBuilder: (context, index) => 16.0.ESH(),
-                          itemCount: _.tabIndex==0 ? _.waitingOrders.length:_.underDelivery.length,
-                          shrinkWrap: true,
+                      CustomText(
+                        text: (_.status == RequestStatus.done)
+                            ? '(${_.tabIndex == 0 ? _.waitingOrders.length : _.tabIndex == 1 ? _.underDelivery.length : _.onWayDelivery.length} ${"order_".tr})'
+                            : '',
+                        fontW: FW.bold,
+                        color: KCMainGrey,
+                        fontSize: 12,
                       ),
-                    )
-                ),
-              ],
+                    ],
+                  ),
+                  Expanded(
+                    child: _.status != RequestStatus.done
+                        ? 0.0.ESH()
+                        : (_.tabIndex == 0 && _.waitingOrders.isEmpty ||
+                                _.tabIndex == 1 && _.underDelivery.isEmpty ||
+                                _.tabIndex == 2 && _.onWayDelivery.isEmpty)
+                            ? Center(
+                                child: RefreshIndicator(
+                                  onRefresh: onRefresh,
+                                  child: ListView(
+                                    children: [
+                                      32.0.ESH(),
+                                      EmptyWidget(
+                                        image: 'open.png',
+                                        title: 'no_waiting_order'.tr,
+                                        subtitle: 'no_delivering_order_add_order_first'.tr,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : RefreshIndicator(
+                                onRefresh: () async {
+                                  _.fetchHome(refresh: true);
+                                },
+                                child: RefreshIndicator(
+                                  onRefresh: onRefresh,
+                                  child: ListView.separated(
+                                    itemBuilder: (context, index) =>
+                                        _.tabIndex == 0
+                                            ? CardOrder(
+                                                order: _.waitingOrders[index],
+                                              )
+                                            : _.tabIndex == 1
+                                                ? CardFinishOrder(
+                                                    order: _.underDelivery[index],
+                                                    isHome: true,
+                                                    // onReviewTap: (){
+                                                    //   Get.bottomSheet(SheetRate(order:_.underDelivery[index]), isScrollControlled: true);
+                                                    // },
+                                                    onCallTap: () {},
+                                                  )
+                                                : CardFinishOrder(
+                                                    order: _.onWayDelivery[index],
+                                                    isHome: false,
+                                                    onCallTap: () {
+                                                      _.launchCall(
+                                                          "tel:+02 ${_.onWayDelivery[index].deliveryPhone}");
+                                                    },
+                                                  ),
+                                    separatorBuilder: (context, index) =>
+                                        16.0.ESH(),
+                                    itemCount: _.tabIndex == 0
+                                        ? _.waitingOrders.length
+                                        : _.tabIndex == 1
+                                            ? _.underDelivery.length
+                                            : _.onWayDelivery.length,
+                                    shrinkWrap: true,
+                                  ),
+                                ),
+                              ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

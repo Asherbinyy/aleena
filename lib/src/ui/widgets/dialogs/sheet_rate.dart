@@ -133,7 +133,7 @@ class _SheetRateState extends State<SheetRate> {
               onTap: (){
                 node.unfocus();
                 if(controller!.text.isNotEmpty){
-                  _setRateController.setRate(rate: "$rate", title:  controller!.text, id: "${widget.order!.id}");
+                  _setRateController.setRate(rate: "$rate", title:  controller!.text, id: widget.order!.id!);
                   //   print("11111111");
                 //   Get.back();
                 //   widget.onSave!(rate,controller!.text);
