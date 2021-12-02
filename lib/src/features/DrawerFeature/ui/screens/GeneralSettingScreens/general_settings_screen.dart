@@ -76,7 +76,9 @@ class GeneralSettingScreens extends StatelessWidget {
                       },
                       title: "Lang_".tr),
                   const Divider(color: kCMainDivider, height: 1),
-                  GeneralSettingRowNotificationForm(),
+                  GeneralSettingRowNotificationForm(
+                    // notifyStatus:_.notyStatus==1?true:false ,
+                  ),
                   const Divider(color: kCMainDivider, height: 1),
                 ],
               ),

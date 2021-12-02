@@ -17,7 +17,10 @@ class SplashController extends GetxController{
     super.onInit();
     // TODO Start Splash Code
     Timer(Duration(seconds: 3), () {
-      if(box.hasData('login')&&box.read("active")==1){
+      if(box.read('WaitingConfirmationScreen')== 1&&box.read("active")==1){
+
+      }
+      else if(box.hasData('login')&&box.read("active")==1){
         Get.offAll(()=>HomeScreen());
       }else{
         Get.offAll(()=>LoginScreen());

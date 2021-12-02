@@ -28,6 +28,7 @@ class ShopInfoController extends GetxController{
   late String _taxRegisterNumber;
   late String _commericalRegisterImage;
   late String _taxRegisterImage;
+  late int _notyStatus;
   String get commericalRegisterImage => _commericalRegisterImage;
   RequestStatus status= RequestStatus.initial;
   ShopInfoRepository _shopInfoRepository = ShopInfoRepository();
@@ -48,6 +49,7 @@ class ShopInfoController extends GetxController{
       _taxRegisterNumber = response.data["data"]["tax_register_number"] ?? '';
       _taxRegisterImage = response.data["data"]["tax_reg_num_image"] ?? '';
       _avatar = response.data["data"]["image"] ?? '';
+      _notyStatus = response.data["data"]["noty"] ?? 1;
       print("convert operation success");
       status = RequestStatus.done;
       update();
@@ -80,4 +82,5 @@ class ShopInfoController extends GetxController{
   String get taxRegisterNumber => _taxRegisterNumber;
 
   String get taxRegisterImage => _taxRegisterImage;
+  int get notyStatus => _notyStatus;
 }

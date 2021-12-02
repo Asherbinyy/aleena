@@ -27,4 +27,5 @@ mixin ApiKey{
    final String uRLArea = apiBaseUrl + "cityarea";
    final String uRLLastOrder = apiBaseUrl + "lastOrder";
    final String uRLDeleteOrder = apiBaseUrl + "Order";
+   final String uRLChangeStatusNotification = apiBaseUrl + "statusNotification";
 }

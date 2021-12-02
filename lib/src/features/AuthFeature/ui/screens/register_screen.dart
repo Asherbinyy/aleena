@@ -71,7 +71,7 @@ class RegisterScreen extends StatelessWidget {
                               upperTitle: 'password_'.tr,
                               // validation: passwordValidator,
                               onComplete: () {
-                                node.unfocus();
+                                node.nextFocus();
                                 _.submit();
                               },
                             ),

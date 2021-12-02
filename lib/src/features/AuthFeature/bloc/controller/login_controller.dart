@@ -80,6 +80,7 @@ class LoginController extends GetxController{
             Get.offAll(()=>WatingChickInfoUpdateScreen());
           }else if(response.data['data']['active']==0){
             Get.offAll(()=>WaitingConfirmationScreen());
+            box.write('WaitingConfirmationScreen',1);
           }
           else{
             box.write('name',response.data['data']['name']??' ');

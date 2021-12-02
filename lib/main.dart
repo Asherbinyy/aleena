@@ -59,11 +59,10 @@ class _MyAppState extends State<MyApp> {
         print("notification message step 1");
         print("notification message step 2");
         print("notification message.notification1 is >>> ${message.data}");
-
         print("notification message step 3");
 
         if(message!=null){
-          customSnackBar(title: message!.data['title']??"",subtitle:   message!.data['msg'],);
+          customSnackBar(title: message.data['title']??"",subtitle:   message.data['msg'],);
         }
 
       });

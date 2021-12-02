@@ -1,6 +1,7 @@
 import 'package:aleena/src/core/constants/color_constants.dart';
 import 'package:aleena/src/core/utils/request_status.dart';
 import 'package:aleena/src/features/AuthFeature/bloc/repo/register_location_controller.dart';
+import 'package:aleena/src/features/DrawerFeature/bloc/controller/change_notifiy_status_controller.dart';
 import 'package:aleena/src/features/DrawerFeature/ui/screens/custom_drawer_screen.dart';
 import 'package:aleena/src/features/HomeFeature/bloc/controller/home_controller.dart';
 import 'package:aleena/src/features/HomeFeature/ui/screens/add_order.dart';
@@ -20,14 +21,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+   Get.put(ChangeNotifyStatusController());
     RegisterLocationController _registerLocationController =
         Get.put(RegisterLocationController());
     HomeController _homeController = Get.put(HomeController());
-
     Future<void> onRefresh() async {
       await _homeController.fetchHome(refresh: true);
     }
-
     return SafeArea(
       child: Scaffold(
         drawer: CustomDrawerScreen(),
@@ -137,12 +137,17 @@ class HomeScreen extends StatelessWidget {
                                                     // onReviewTap: (){
                                                     //   Get.bottomSheet(SheetRate(order:_.underDelivery[index]), isScrollControlled: true);
                                                     // },
-                                                    onCallTap: () {},
+                                                    onCallTap: () {
+                                                      print("_.onWayDelivery[index].deliveryPhone ${_.underDelivery[index].deliveryPhone}");
+                                                      _.launchCall(
+                                                          "tel:+02 ${_.underDelivery[index].deliveryPhone}");
+                                                    },
                                                   )
                                                 : CardFinishOrder(
                                                     order: _.onWayDelivery[index],
                                                     isHome: false,
                                                     onCallTap: () {
+                                                      print("_.onWayDelivery[index].deliveryPhone ${_.onWayDelivery[index].deliveryPhone}");
                                                       _.launchCall(
                                                           "tel:+02 ${_.onWayDelivery[index].deliveryPhone}");
                                                     },

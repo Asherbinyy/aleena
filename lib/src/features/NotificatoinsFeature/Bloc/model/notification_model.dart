@@ -31,9 +31,15 @@ class NotificationsModel {
     time = json['time']??"";
     deliveryImage = json['deliveryImage']??"";
     deliveryName = json['deliveryName']??"";
-    order = Order.fromJson(json['order']);
-    status = null;
+    if(json["order"] ==null ){
+    }else{
+      order = Order.fromJson(json['order']);
+    }
+    if(json['status']==null){
+      status = -1;
+    }else{
+      status = json['status'];
+    }
   }
-
 }
 

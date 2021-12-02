@@ -169,8 +169,6 @@ class RegisterInfoController extends GetxController{
     darayebController?.dispose();
     super.dispose();
   }
-
-
 }
 
 
