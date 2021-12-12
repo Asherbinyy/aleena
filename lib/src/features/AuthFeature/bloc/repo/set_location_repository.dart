@@ -24,7 +24,8 @@ class SetLocationRepository with ApiKey{
           body: {
             'lat':lat,
             'lng':lon,
-            'address':address
+            'address':address,
+
           }
       );
     }on SocketException{

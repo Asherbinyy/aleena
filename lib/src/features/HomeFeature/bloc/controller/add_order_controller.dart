@@ -14,9 +14,9 @@ import 'package:get/get.dart';
 class AddOrderController extends GetxController{
 
 
-  final double? lat;
-  final double? lon;
-  final String? address;
+   double? lat;
+   double? lon;
+   String? address;
 
 
   AddOrderController({this.lat, this.lon, this.address});
@@ -27,6 +27,32 @@ class AddOrderController extends GetxController{
   TextEditingController? phoneController;
   TextEditingController? addressController;
   TextEditingController? priceController;
+  bool _returnable = false;
+
+
+  void changeLat(double replaceLat){
+    lat = replaceLat;
+    update();
+  }
+
+   void changeLon(double replaceLon){
+     lon = replaceLon;
+     update();
+   }
+
+   void changeAddress(String replaceAddress){
+     address = replaceAddress;
+     update();
+   }
+
+
+  bool get returnable => _returnable;
+
+  set returnable(bool value) {
+    _returnable = value;
+    update();
+  }
+
   String _paymentMethod='';
   HomeController _homeController = Get.find();
   String get paymentMethod => _paymentMethod;
@@ -52,7 +78,7 @@ class AddOrderController extends GetxController{
         print('my phone is ${phoneController!.value.text}');
 
         var response = await _addOrderRepository.addOrder(
-            address: addressController!.text,
+          address: addressController!.text,
           price: priceController!.text,
           clientName: clientNameController!.text,
           orderNumber: orderNumberController!.text,
@@ -60,6 +86,7 @@ class AddOrderController extends GetxController{
           phone: phoneController!.text,
           lng: lon??0.0,
           lat: lat??0.0,
+          returnable: _returnable
         );
         Get.back();
         if (response.statusCode == 200 && response.data["status"] == true) {

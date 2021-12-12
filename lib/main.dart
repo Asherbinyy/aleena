@@ -10,6 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import 'src/core/services/Lang/localization_services.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'src/core/services/notification_badge.dart';
+import 'src/features/HomeFeature/bloc/controller/home_controller.dart';
 import 'src/ui/widgets/GeneralWidgets/custom_text.dart';
 import 'package:aleena/src/bloc/models/flutter_model.dart';
 import 'package:aleena/src/core/services/notification_badge.dart';
@@ -25,8 +26,9 @@ void main()async{
   await GetStorage.init();
   await Firebase.initializeApp();
   runApp(MyApp());
-
 }
+
+
 
 class MyApp extends StatefulWidget {
   @override
@@ -35,7 +37,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   late final FirebaseMessaging _messaging;
-
+  HomeController _homeController = Get.put(HomeController());
   // register notification
   void registerNotification()async{
     await Firebase.initializeApp();
@@ -60,18 +62,16 @@ class _MyAppState extends State<MyApp> {
         print("notification message step 2");
         print("notification message.notification1 is >>> ${message.data}");
         print("notification message step 3");
-
         if(message!=null){
           customSnackBar(title: message.data['title']??"",subtitle:   message.data['msg'],);
+          _homeController.fetchHome();
         }
-
       });
 
-      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        print('A new onMessageOpenedApp event was published!');
-        Get.to(HomeScreen());
-      });
-
+      // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      //   print('A new onMessageOpenedApp event was published!');
+      //   // Get.to(HomeScreen());
+      // });
 
     }else{
       print("permition declined by user");

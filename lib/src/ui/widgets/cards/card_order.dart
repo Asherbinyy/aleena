@@ -37,6 +37,13 @@ class CardOrder extends StatelessWidget {
                   color: KCMainBlack,
                   fontW: FW.medium,
                 ),
+                6.0.ESW(),
+                CustomText(
+                  text: '${order!.dashboardId}',
+                  fontSize: 13,
+                  color: Colors.red,
+                  fontW: FW.light,
+                ),
                 Spacer(),
                 // ButtonCircle(icon: 'locationicon.png',onTap: (){},),
                 6.0.ESW(),

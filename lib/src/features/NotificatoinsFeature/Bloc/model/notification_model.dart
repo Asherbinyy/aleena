@@ -31,14 +31,30 @@ class NotificationsModel {
     time = json['time']??"";
     deliveryImage = json['deliveryImage']??"";
     deliveryName = json['deliveryName']??"";
+
     if(json["order"] ==null ){
+      order = Order(
+        status: 1,
+        deliveryImage: '',
+        deliveryName: '',
+        duration: '',
+        phone: '',
+        address: '',
+        id: 0,
+        price: '',
+        clientName: '',
+        orderNumber: '',
+        paymentMethod: '',
+        deliveryPhone: '',
+        qrCode: ''
+      );
     }else{
       order = Order.fromJson(json['order']);
     }
-    if(json['status']==null){
-      status = -1;
+    if(json['status']==null || json['status']==""){
+      status = 0;
     }else{
-      status = json['status'];
+      status = int.tryParse(json['status'].toString());
     }
   }
 }

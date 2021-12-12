@@ -14,6 +14,7 @@ class AddOrderRepository with ApiKey{
   NetworkService _networkService = NetworkService();
   Future<Response> addOrder({
     required String orderNumber,
+    bool returnable=false,
     required String clientName,
     required String phone,
     required String price,
@@ -35,7 +36,8 @@ class AddOrderRepository with ApiKey{
             'order_type' : paymentMethod,
             'lat' : lat,
             'lng' : lng,
-            'address' : address
+            'address' : address,
+            'returnable' : returnable
         }
       );
     }on SocketException{

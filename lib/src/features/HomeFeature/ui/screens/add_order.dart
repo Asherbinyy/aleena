@@ -1,5 +1,6 @@
 import 'package:aleena/src/features/HomeFeature/bloc/controller/add_order_controller.dart';
 import 'package:aleena/src/features/HomeFeature/bloc/controller/home_controller.dart';
+import 'package:aleena/src/features/LocationFeature/ui/screens/location_screen.dart';
 import 'package:aleena/src/ui/widgets/GeneralWidgets/custom_text.dart';
 import 'package:aleena/src/ui/widgets/TextFields/text_field_default.dart';
 import 'package:aleena/src/ui/widgets/appbars/app_bar_back.dart';
@@ -70,16 +71,29 @@ class AddOrderScreen extends StatelessWidget {
                         },
                       ),
                       16.0.ESH(),
-                      TextFieldDefault(
-                        hint: 'enter_address'.tr,
-                        errorText: "must_enter_address".tr,
-                        controller: _.addressController,
-                        keyboardType: TextInputType.number,
-                        upperTitle: 'address_'.tr,
-                        // validation: phoneValidator,
-                        onComplete: () {
-                          node.nextFocus();
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(()=>MapScreen(
+                            // targetPosition: position,
+                            onSave: (double lat , double lon , String address){
+                              _.changeAddress(address);
+                              _.changeLat(lat);
+                              _.changeLon(lon);
+                              Get.back();
+                            },));
                         },
+                        child: TextFieldDefault(
+                          enable: false,
+                          hint: 'enter_address'.tr,
+                          errorText: "must_enter_address".tr,
+                          controller: _.addressController,
+                          keyboardType: TextInputType.number,
+                          upperTitle: 'address_'.tr,
+                          // validation: phoneValidator,
+                          onComplete: () {
+                            node.nextFocus();
+                          },
+                        ),
                       ),
                       16.0.ESH(),
                       TextFieldDefault(
@@ -92,6 +106,18 @@ class AddOrderScreen extends StatelessWidget {
                         onComplete: () {
                           node.unfocus();
                         },
+                      ),
+                      16.0.ESH(),
+                      Row(
+                        children: [
+                          Checkbox(value: _.returnable, onChanged: (value){_.returnable=value!;}),
+                          CustomText(
+                            text: 'returnable'.tr,
+                            fontSize: 16,
+                            fontW: FW.medium,
+                            color: Color(0xff999999),
+                          ),
+                        ],
                       ),
                       16.0.ESH(),
                       Padding(
@@ -107,6 +133,7 @@ class AddOrderScreen extends StatelessWidget {
                           ],
                         ),
                       ),
+
                       16.0.ESH(),
                       CardPayment(
                         onTap: (){

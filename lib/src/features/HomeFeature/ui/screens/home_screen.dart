@@ -29,24 +29,24 @@ class HomeScreen extends StatelessWidget {
       await _homeController.fetchHome(refresh: true);
     }
     return SafeArea(
-      child: Scaffold(
-        drawer: CustomDrawerScreen(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Get.to(()=>AddOrderScreen());
-            _homeController.gotoMap();
-          },
-          backgroundColor: KCMain,
-          child: Center(
-            child: Image.asset(
-              'assets/icons/float.png',
-              color: Colors.white,
-              height: 29.h,
+      child: GetBuilder<HomeController>(
+        builder: (_) =>  Scaffold(
+          drawer: CustomDrawerScreen(),
+          floatingActionButton: _.tabIndex ==0 ? FloatingActionButton(
+            onPressed: () {
+              // Get.to(()=>AddOrderScreen());
+              _homeController.gotoMap();
+            },
+            backgroundColor: KCMain,
+            child: Center(
+              child: Image.asset(
+                'assets/icons/float.png',
+                color: Colors.white,
+                height: 29.h,
+              ),
             ),
-          ),
-        ),
-        body: GetBuilder<HomeController>(
-          builder: (_) => ScaffoldBackground(
+          ):null,
+          body: ScaffoldBackground(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0.w),
               child: Column(
@@ -81,8 +81,8 @@ class HomeScreen extends StatelessWidget {
                         text: _.tabIndex == 0
                             ? 'waiting_order'.tr
                             : _.tabIndex == 1
-                                ? 'delivering_order'.tr
-                                : "on_way_order".tr,
+                            ? 'delivering_order'.tr
+                            : "on_way_order".tr,
                         fontW: FW.bold,
                         color: KCMainBlack,
                         fontSize: 16,
@@ -101,68 +101,68 @@ class HomeScreen extends StatelessWidget {
                     child: _.status != RequestStatus.done
                         ? 0.0.ESH()
                         : (_.tabIndex == 0 && _.waitingOrders.isEmpty ||
-                                _.tabIndex == 1 && _.underDelivery.isEmpty ||
-                                _.tabIndex == 2 && _.onWayDelivery.isEmpty)
-                            ? Center(
-                                child: RefreshIndicator(
-                                  onRefresh: onRefresh,
-                                  child: ListView(
-                                    children: [
-                                      32.0.ESH(),
-                                      EmptyWidget(
-                                        image: 'open.png',
-                                        title: 'no_waiting_order'.tr,
-                                        subtitle: 'no_delivering_order_add_order_first'.tr,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            : RefreshIndicator(
-                                onRefresh: () async {
-                                  _.fetchHome(refresh: true);
-                                },
-                                child: RefreshIndicator(
-                                  onRefresh: onRefresh,
-                                  child: ListView.separated(
-                                    itemBuilder: (context, index) =>
-                                        _.tabIndex == 0
-                                            ? CardOrder(
-                                                order: _.waitingOrders[index],
-                                              )
-                                            : _.tabIndex == 1
-                                                ? CardFinishOrder(
-                                                    order: _.underDelivery[index],
-                                                    isHome: true,
-                                                    // onReviewTap: (){
-                                                    //   Get.bottomSheet(SheetRate(order:_.underDelivery[index]), isScrollControlled: true);
-                                                    // },
-                                                    onCallTap: () {
-                                                      print("_.onWayDelivery[index].deliveryPhone ${_.underDelivery[index].deliveryPhone}");
-                                                      _.launchCall(
-                                                          "tel:+02 ${_.underDelivery[index].deliveryPhone}");
-                                                    },
-                                                  )
-                                                : CardFinishOrder(
-                                                    order: _.onWayDelivery[index],
-                                                    isHome: false,
-                                                    onCallTap: () {
-                                                      print("_.onWayDelivery[index].deliveryPhone ${_.onWayDelivery[index].deliveryPhone}");
-                                                      _.launchCall(
-                                                          "tel:+02 ${_.onWayDelivery[index].deliveryPhone}");
-                                                    },
-                                                  ),
-                                    separatorBuilder: (context, index) =>
-                                        16.0.ESH(),
-                                    itemCount: _.tabIndex == 0
-                                        ? _.waitingOrders.length
-                                        : _.tabIndex == 1
-                                            ? _.underDelivery.length
-                                            : _.onWayDelivery.length,
-                                    shrinkWrap: true,
-                                  ),
-                                ),
-                              ),
+                        _.tabIndex == 1 && _.underDelivery.isEmpty ||
+                        _.tabIndex == 2 && _.onWayDelivery.isEmpty)
+                        ? Center(
+                      child: RefreshIndicator(
+                        onRefresh: onRefresh,
+                        child: ListView(
+                          children: [
+                            32.0.ESH(),
+                            EmptyWidget(
+                              image: 'open.png',
+                              title: 'no_waiting_order'.tr,
+                              subtitle: 'no_delivering_order_add_order_first'.tr,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                        : RefreshIndicator(
+                      onRefresh: () async {
+                        _.fetchHome(refresh: true);
+                      },
+                      child: RefreshIndicator(
+                        onRefresh: onRefresh,
+                        child: ListView.separated(
+                          itemBuilder: (context, index) =>
+                          _.tabIndex == 0
+                              ? CardOrder(
+                            order: _.waitingOrders[index],
+                          )
+                              : _.tabIndex == 1
+                              ? CardFinishOrder(
+                            order: _.underDelivery[index],
+                            isHome: true,
+                            // onReviewTap: (){
+                            //   Get.bottomSheet(SheetRate(order:_.underDelivery[index]), isScrollControlled: true);
+                            // },
+                            onCallTap: () {
+                              print("_.onWayDelivery[index].deliveryPhone ${_.underDelivery[index].deliveryPhone}");
+                              _.launchCall(
+                                  "tel:+02 ${_.underDelivery[index].deliveryPhone}");
+                            },
+                          )
+                              : CardFinishOrder(
+                            order: _.onWayDelivery[index],
+                            isHome: false,
+                            onCallTap: () {
+                              print("_.onWayDelivery[index].deliveryPhone ${_.onWayDelivery[index].deliveryPhone}");
+                              _.launchCall(
+                                  "tel:+02 ${_.onWayDelivery[index].deliveryPhone}");
+                            },
+                          ),
+                          separatorBuilder: (context, index) =>
+                              16.0.ESH(),
+                          itemCount: _.tabIndex == 0
+                              ? _.waitingOrders.length
+                              : _.tabIndex == 1
+                              ? _.underDelivery.length
+                              : _.onWayDelivery.length,
+                          shrinkWrap: true,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

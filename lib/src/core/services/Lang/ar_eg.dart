@@ -129,4 +129,5 @@ const Map<String, String> arAE = {
   "must_set_area": "يجب ادخال المنطقه اولا",
   "confirm_address": "تأكيد العنوان",
   "change_address": "تغير العنوان",
+  "returnable": "قابل للاسترجاع",
 };

@@ -127,4 +127,5 @@ const Map<String, String> enUS = {
   "must_set_area": "You must enter the region first",
   "confirm_address": "Address confirmation",
   "change_address": "change of address",
+  "returnable": "available to return",
 };

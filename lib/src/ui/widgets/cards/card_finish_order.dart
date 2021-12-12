@@ -52,6 +52,13 @@ class CardFinishOrder extends StatelessWidget {
                     color: KCMainBlack,
                     fontW: FW.medium,
                   ),
+                  6.0.ESW(),
+                  CustomText(
+                    text: '${order!.dashboardId}',
+                    fontSize: 13,
+                    color: Colors.red,
+                    fontW: FW.light,
+                  ),
                 ],
               ),
               8.0.ESH(),
