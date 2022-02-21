@@ -50,6 +50,7 @@ dependencies:
   firebase_core: ^1.10.0
   firebase_messaging: ^11.1.0
   image_picker: ^0.8.4+4
+  flutter_local_notifications: ^9.1.5
   qr_flutter: ^4.0.0
   url_launcher:
   http:
@@ -111,5 +112,21 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
+  fonts:
+    - family: medium
+      fonts:
+        - asset: assets/fonts/ge_din_meduim.otf
+    - family: bold
+      fonts:
+        - asset: assets/fonts/ge_din_bold.otf
+    - family: simebold
+      fonts:
+        - asset: assets/fonts/ge_din_meduim.otf
+    - family: regular
+      fonts:
+        - asset: assets/fonts/ge_din_meduim.otf
+    - family: light
+      fonts:
+        - asset: assets/fonts/ge_din_light.otf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

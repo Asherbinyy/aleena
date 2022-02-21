@@ -12,7 +12,6 @@ class Order {
   String? deliveryImage;
   String? qrCode;
   String? duration;
-  String? dashboardId;
 
   Order({
     this.id,
@@ -28,7 +27,7 @@ class Order {
     this.deliveryName,
     this.qrCode,
     this.duration,
-    this.dashboardId
+
   });
 
   Order.fromJson(Map<String, dynamic> map) {
@@ -45,6 +44,5 @@ class Order {
     this.deliveryImage = map['deliveryImage'] ?? '';
     this.qrCode = map['qrCode'] ?? '';
     this.duration = map['duration'] ?? '';
-    this.duration = map['dashboard_id'] !=null ? map['dashboard_id'].toString() : '';
   }
 }

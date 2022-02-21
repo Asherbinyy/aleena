@@ -89,6 +89,9 @@ String getFontFamily(FW fw) {
     case FW.semibold:
       return 'semibold';
       break;
+    case FW.medium:
+      return 'medium';
+      break;
     default:
       return 'semibold';
   }

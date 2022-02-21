@@ -26,6 +26,13 @@ mixin ApiKey{
    final String uRLCity = apiBaseUrl + "city";
    final String uRLArea = apiBaseUrl + "cityarea";
    final String uRLLastOrder = apiBaseUrl + "lastOrder";
+   final String uRLReturnOrders = apiBaseUrl + "return_orders";
    final String uRLDeleteOrder = apiBaseUrl + "Order";
    final String uRLChangeStatusNotification = apiBaseUrl + "statusNotification";
+   String uRLFetchPlaceId({required String place , required String lang}){
+      return 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$place&language=$lang&types=geocode&key=AIzaSyAr46q-zhrzke0rLD7YbTvDxO91cIdBX_Q';
+   }
+   String uRLFetchPlaceCoordinates({required String placeId}){
+      return 'https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAr46q-zhrzke0rLD7YbTvDxO91cIdBX_Q&place_id=$placeId';
+   }
 }

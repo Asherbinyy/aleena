@@ -17,9 +17,10 @@ class CardFinishOrder extends StatelessWidget {
   final Order? order;
   final bool isHome;
   final bool isRate;
+  final bool returnOrder;
 
 
-  CardFinishOrder({this.onReviewTap,this.onCallTap , this.order, this.isHome = false, this.isRate=false});
+  CardFinishOrder({this.onReviewTap,this.onCallTap , this.order, this.isHome = false, this.isRate=false,this.returnOrder=false});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class CardFinishOrder extends StatelessWidget {
                   ),
                   6.0.ESW(),
                   CustomText(
-                    text: '${order!.dashboardId}',
+                    text: '${order!.id}',
                     fontSize: 13,
                     color: Colors.red,
                     fontW: FW.light,
@@ -103,7 +104,7 @@ class CardFinishOrder extends StatelessWidget {
                   : Padding(
                       padding: EdgeInsets.only(top: 12.0.h),
                       child: ButtonDefault(
-                        title: 'confirm_delivery'.tr,
+                        title: returnOrder ? 'recieve_order'.tr:'confirm_delivery'.tr,
                         onTap: (){
                           Get.bottomSheet(
                             SheetQr(qr: order!.qrCode.toString(),),

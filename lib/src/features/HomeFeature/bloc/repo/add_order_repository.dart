@@ -21,7 +21,8 @@ class AddOrderRepository with ApiKey{
     required String paymentMethod,
     required String address,
     required double lat,
-    required double lng
+    required double lng,
+    String? mark
    })async{
     Response response;
     try{
@@ -37,7 +38,9 @@ class AddOrderRepository with ApiKey{
             'lat' : lat,
             'lng' : lng,
             'address' : address,
-            'returnable' : returnable
+            'returnable' : returnable,
+          if(mark!=null)
+            'mark' : mark,
         }
       );
     }on SocketException{

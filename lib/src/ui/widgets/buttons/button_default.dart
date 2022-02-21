@@ -80,7 +80,7 @@ class ButtonDefault extends StatelessWidget {
               text: title,
               color: titleColor,
               fontSize: textSize,
-              fontW: FW.semibold,
+              fontW: FW.medium,
             ),
             7.0.ESW(),
             Image.asset(
@@ -98,7 +98,7 @@ class ButtonDefault extends StatelessWidget {
           text: title,
           color: titleColor,
           fontSize: textSize,
-          fontW: FW.semibold,
+          fontW: FW.medium,
         ),
       );
     }

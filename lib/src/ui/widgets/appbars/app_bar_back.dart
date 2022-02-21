@@ -13,7 +13,9 @@ class AppBarBack extends StatelessWidget {
       width:double.infinity,
       // height: 80,
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 16.w),
+        padding:  EdgeInsets.symmetric(
+            horizontal: 0.w,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

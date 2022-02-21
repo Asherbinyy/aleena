@@ -128,4 +128,8 @@ const Map<String, String> enUS = {
   "confirm_address": "Address confirmation",
   "change_address": "change of address",
   "returnable": "available to return",
+  "return_orders": "return orders",
+  "recieve_order": "recieve orders",
+  "mark_place": "place mark",
+  "add_client_address": "add client address",
 };

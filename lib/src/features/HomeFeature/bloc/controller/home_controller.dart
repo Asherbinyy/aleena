@@ -75,7 +75,6 @@ class HomeController extends GetxController{
 
   void launchCall(command) async {
     if (!await launch(command)) throw 'Could not launch $command';
-
   }
 
   Future<void> gotoMap()async{

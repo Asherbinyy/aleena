@@ -27,6 +27,7 @@ class AddOrderController extends GetxController{
   TextEditingController? phoneController;
   TextEditingController? addressController;
   TextEditingController? priceController;
+  TextEditingController? markController;
   bool _returnable = false;
 
 
@@ -86,7 +87,8 @@ class AddOrderController extends GetxController{
           phone: phoneController!.text,
           lng: lon??0.0,
           lat: lat??0.0,
-          returnable: _returnable
+          returnable: _returnable,
+          mark: markController!.text.isNotEmpty? markController!.text : null,
         );
         Get.back();
         if (response.statusCode == 200 && response.data["status"] == true) {
@@ -117,6 +119,7 @@ class AddOrderController extends GetxController{
     phoneController = TextEditingController();
     addressController = TextEditingController();
     priceController = TextEditingController();
+    markController = TextEditingController();
     addressController!.text = address??'';
   }
 
@@ -128,6 +131,7 @@ class AddOrderController extends GetxController{
     phoneController?.dispose();
     addressController?.dispose();
     priceController?.dispose();
+    markController?.dispose();
     super.dispose();
   }
 }

@@ -3,6 +3,7 @@ import 'package:aleena/src/core/utils/extensions.dart';
 import 'package:aleena/src/features/DrawerFeature/bloc/controller/log_out_controller.dart';
 import 'package:aleena/src/features/DrawerFeature/bloc/controller/privacy_and_terms_controller.dart';
 import 'package:aleena/src/features/DrawerFeature/ui/screens/LastOrdersScreen/last_orders_screen.dart';
+import 'package:aleena/src/features/DrawerFeature/ui/screens/return_orders_screen.dart';
 import 'package:aleena/src/features/DrawerFeature/ui/widgets/drawer_row_form.dart';
 import 'package:aleena/src/features/HomeFeature/ui/screens/home_screen.dart';
 import 'package:aleena/src/ui/widgets/GeneralWidgets/custom_text.dart';
@@ -88,6 +89,14 @@ class CustomDrawerScreen extends StatelessWidget {
                       onTap: () {
                         Get.back();
                         Get.to(() => LastOrdersScreen());
+                      }),
+                  12.h.ESH(),
+                  DrawerRowForm(
+                      title: "return_orders".tr,
+                      icon: "order",
+                      onTap: () {
+                        Get.back();
+                        Get.to(() => ReturnOrdersScreen());
                       }),
                   12.h.ESH(),
                   DrawerRowForm(

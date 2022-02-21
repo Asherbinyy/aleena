@@ -97,6 +97,15 @@ class AddOrderScreen extends StatelessWidget {
                       ),
                       16.0.ESH(),
                       TextFieldDefault(
+                        hint: 'mark_place'.tr,
+                        controller: _.markController,
+                        upperTitle: 'mark_place'.tr,
+                        onComplete: () {
+                          node.nextFocus();
+                        },
+                      ),
+                      16.0.ESH(),
+                      TextFieldDefault(
                         hint: 'Enter_the_required_price'.tr,
                         errorText: "must_Enter_the_required_price".tr,
                         controller: _.priceController,

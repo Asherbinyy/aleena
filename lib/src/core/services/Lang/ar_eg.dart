@@ -130,4 +130,8 @@ const Map<String, String> arAE = {
   "confirm_address": "تأكيد العنوان",
   "change_address": "تغير العنوان",
   "returnable": "قابل للاسترجاع",
+  "return_orders": "المرتجع",
+  "recieve_order": "استلام المرتجع",
+  "mark_place": "علامة مميزة",
+  "add_client_address": "ادخل عنوان العميل",
 };

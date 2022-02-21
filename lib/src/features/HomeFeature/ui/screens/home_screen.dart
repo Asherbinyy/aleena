@@ -139,8 +139,7 @@ class HomeScreen extends StatelessWidget {
                             // },
                             onCallTap: () {
                               print("_.onWayDelivery[index].deliveryPhone ${_.underDelivery[index].deliveryPhone}");
-                              _.launchCall(
-                                  "tel:+02 ${_.underDelivery[index].deliveryPhone}");
+                              _.launchCall("tel:+02 ${_.underDelivery[index].deliveryPhone}");
                             },
                           )
                               : CardFinishOrder(
