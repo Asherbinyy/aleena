@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:aleena/src/features/AuthFeature/ui/screens/login_screen.dart';
+import 'package:aleena/src/features/AuthFeature/ui/screens/waiting_confirm_screen.dart';
 import 'package:aleena/src/features/HomeFeature/ui/screens/home_screen.dart';
 import 'package:aleena/src/features/NotificatoinsFeature/Bloc/model/notification_model.dart';
 import 'package:aleena/src/features/NotificatoinsFeature/Ui/Screen/notifications_screen.dart';
@@ -21,11 +23,30 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'src/ui/widgets/custom_snack_bar.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+
+GetStorage box = GetStorage();
+
+
 // start background
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('Handling a background message ${message.messageId}');
   print(message.data);
+  if(message.data['type']!=null){
+    if(message.data['type']=='active'){
+      box.write('active',1);
+      box.write('login',1);
+      box.write('WaitingConfirmationScreen',0);
+      HomeController _homeController = Get.put(HomeController());
+      _homeController.fetchRegoins();
+      Get.offAll(()=> HomeScreen());
+    }else if(message.data['type']=='disactive'){
+      box.write('active',0);
+      box.write('login',0);
+      box.write('WaitingConfirmationScreen',1);
+      Get.offAll(()=> WaitingConfirmationScreen());
+    }
+  }
   flutterLocalNotificationsPlugin.show(
       0,
       message.data['title'],
@@ -134,12 +155,14 @@ class _MyAppState extends State<MyApp> {
     print('a7aaaaaaaa ${payload}');
     var decodedData = jsonDecode(payload!);
     // print('a7oooooooo ${decodedData['ms']}');
-    if(payload.contains('active')){
-      Get.to(()=> NotificatinsScreen());
-    }else{
+    if(payload == 'active'){
       box.write('active',1);
       box.write('login',1);
+      box.write('WaitingConfirmationScreen',0);
       Get.to(()=> HomeScreen());
+      _homeController.fetchRegoins();
+    }else{
+      Get.to(()=> NotificatinsScreen());
     }
   }
   void registerNotification()async{
@@ -166,7 +189,18 @@ class _MyAppState extends State<MyApp> {
     {
       print("User granted the permission");
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        print("notification message.notification1 is >>> ${message.data}");
+        print("notification message.notification1 is >>> ${message.data['type']}");
+        if(message.data['type']=='active'){
+          box.write('active',1);
+          box.write('login',1);
+          box.write('WaitingConfirmationScreen',0);
+          Get.offAll(()=> HomeScreen());
+        }else if(message.data['type']=='disactive'){
+          box.write('active',0);
+          box.write('login',0);
+          box.write('WaitingConfirmationScreen',1);
+          Get.offAll(()=> WaitingConfirmationScreen());
+        }
         flutterLocalNotificationsPlugin.show(
             0,
             message.data['title'],
@@ -179,7 +213,7 @@ class _MyAppState extends State<MyApp> {
                 enableVibration: true,
               ),
             ),
-            payload: json.encode(message.data.toString())
+            payload: message.data['type']??''
         );
         _homeController.fetchHome(refresh: true);
       });
@@ -212,6 +246,7 @@ class _MyAppState extends State<MyApp> {
             primarySwatch: Colors.blue,
           ),
           home: SplashScreen(),
+          // home: LoginScreen(),
         ),
       ),
     );

@@ -29,6 +29,10 @@ mixin ApiKey{
    final String uRLReturnOrders = apiBaseUrl + "return_orders";
    final String uRLDeleteOrder = apiBaseUrl + "Order";
    final String uRLChangeStatusNotification = apiBaseUrl + "statusNotification";
+   final String uRLFetchDeliveryFee = apiBaseUrl + "fetch_delivery_fee";
+
+   final String uRLFetchRegoins = apiBaseUrl + "get_area_lat_lng";
+
    String uRLFetchPlaceId({required String place , required String lang}){
       return 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$place&language=$lang&types=geocode&key=AIzaSyAr46q-zhrzke0rLD7YbTvDxO91cIdBX_Q';
    }

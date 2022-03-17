@@ -77,23 +77,23 @@ class VerficationScreen extends StatelessWidget {
                       },
                     ),
                     14.0.ESH(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomText(
-                          text: 'resend_after'.tr,
-                          color: KCMainBlack,
-                          fontSize: 15,
-                          fontW: FW.medium,
-                        ),
-                        CustomText(
-                          text: '(${'59:00'})',
-                          color: KCSeconary,
-                          fontSize: 15,
-                          fontW: FW.medium,
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     CustomText(
+                    //       text: 'resend_after'.tr,
+                    //       color: KCMainBlack,
+                    //       fontSize: 15,
+                    //       fontW: FW.medium,
+                    //     ),
+                    //     CustomText(
+                    //       text: '(${'59:00'})',
+                    //       color: KCSeconary,
+                    //       fontSize: 15,
+                    //       fontW: FW.medium,
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

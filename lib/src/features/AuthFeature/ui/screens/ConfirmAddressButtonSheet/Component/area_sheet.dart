@@ -50,23 +50,25 @@ class AreaButtonSheet extends StatelessWidget {
                   isClose: false,
                 ),
                 24.0.ESH(),
-                ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => InkWell(
-                      onTap: (){
-                        print("xxxxxxxxxxxxxxxxxxxxxxx");
-                        _.setAreaSelectedId = _.areaList![index].id;
-                        _.setAreaSelectedTitle =  _.areaList![index].title;
-                        Get.back();
-                      },
-                      child: CityOrAreaRowForm(
-                        cityName: areaList[index].title,
-                      )),
-                  separatorBuilder: (context, index) => Divider(
-                    height: 1.5.h,
-                    color: KCTFEnableBorder,
+                Expanded(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => InkWell(
+                        onTap: (){
+                          print("xxxxxxxxxxxxxxxxxxxxxxx");
+                          _.setAreaSelectedId = _.areaList![index].id;
+                          _.setAreaSelectedTitle =  _.areaList![index].title;
+                          Get.back();
+                        },
+                        child: CityOrAreaRowForm(
+                          cityName: areaList[index].title,
+                        )),
+                    separatorBuilder: (context, index) => Divider(
+                      height: 1.5.h,
+                      color: KCTFEnableBorder,
+                    ),
+                    itemCount: areaList.length,
                   ),
-                  itemCount: areaList.length,
                 ),
               ],
             ),

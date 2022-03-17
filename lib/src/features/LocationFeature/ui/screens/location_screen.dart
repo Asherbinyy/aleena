@@ -20,10 +20,10 @@ import '/src/core/utils/extensions.dart';
 
 
 class MapScreen extends StatefulWidget {
-  final Function(double,double,String)? onSave;
+  final Function(double,double,String,int?)? onSave;
   final LatLng? targetPosition;
-
-  MapScreen({this.onSave,this.targetPosition});
+  final Set<Polyline>? polyLines;
+  MapScreen({this.onSave,this.targetPosition,this.polyLines});
 
   @override
   _MapScreenState createState() => _MapScreenState();
@@ -144,6 +144,48 @@ class _MapScreenState extends State<MapScreen> {
     // setCustomMarker();
   }
   Completer<GoogleMapController> _mapController = Completer();
+
+
+
+
+  int areaId = 0;
+
+  void locationInsideArea({required double lat ,required double lon}){
+
+    widget.polyLines!.forEach((element) {
+      if(checkIfValidMarker(LatLng(lat,lon),element.points)){
+        setState(() {
+          areaId = int.tryParse(element.polylineId.toString())!;
+        });
+      }
+    });
+  }
+  bool rayCastIntersect(LatLng tap, LatLng vertA, LatLng vertB) {
+    double aY = vertA.latitude;
+    double bY = vertB.latitude;
+    double aX = vertA.longitude;
+    double bX = vertB.longitude;
+    double pY = tap.latitude;
+    double pX = tap.longitude;
+
+    if ((aY > pY && bY > pY) || (aY < pY && bY < pY) || (aX < pX && bX < pX)) {
+      return false; // a and b can't both be above or below pt.y, and a or
+      // b must be east of pt.x
+    }
+    return true;
+  }
+  bool checkIfValidMarker(LatLng tap, List<LatLng> vertices) {
+    int intersectCount = 0;
+    for (int j = 0; j < vertices.length - 1; j++) {
+      if (rayCastIntersect(tap, vertices[j], vertices[j + 1])) {
+        intersectCount++;
+      }
+    }
+    return ((intersectCount % 2) == 1); // odd = inside, even = outside;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     Get.put(MapSearchController());
@@ -182,6 +224,7 @@ class _MapScreenState extends State<MapScreen> {
                         rotateGesturesEnabled: true,
                         mapType: MapType.normal,
                         scrollGesturesEnabled: true,
+                        polylines: widget.polyLines?? {},
                         // zoomGesturesEnabled: true,
                         // zoomControlsEnabled: true,
                         initialCameraPosition: _kGooglePlex,
@@ -199,6 +242,7 @@ class _MapScreenState extends State<MapScreen> {
                                   // icon: mapMarker!,
                                 )
                             );
+                         //   locationInsideArea(lat: targetPosition!.latitude,lon: targetPosition!.longitude);
                           });
                           setAddress();
                         },
@@ -255,7 +299,7 @@ class _MapScreenState extends State<MapScreen> {
                                         print('address! ${address!}');
                                       if(widget.onSave!=null){
                                         print('this is my location');
-                                        widget.onSave!(targetPosition!.latitude,targetPosition!.longitude,address!);
+                                        widget.onSave!(targetPosition!.latitude,targetPosition!.longitude,address!,areaId);
                                       }
                                     },),
                                   ],
@@ -306,7 +350,7 @@ class _MapScreenState extends State<MapScreen> {
                           ),
                           separatorBuilder: (context, index) => 10.0.ESH(),
                           itemCount: _.places.length,
-                        shrinkWrap: true,
+                          shrinkWrap: true,
                       )
                           :
                       0.0.ESH()

@@ -22,14 +22,14 @@ class RegisterRepository with ApiKey{
       response = await _networkService.post(
           url:URLRegister,
           body: {
-            'phone':    phone,
+            'phone': phone,
             'password': password,
-            'name':     name,
-            'device_token':     deviceToken,
+            'name': name,
+            'device_token': deviceToken,
           }
       );
     }on SocketException{
-      throw SocketException('No Internet Connection');
+      throw const SocketException('No Internet Connection');
     }on Exception{
       throw UnKnownException('there is unKnown Exception');
     }catch (e){

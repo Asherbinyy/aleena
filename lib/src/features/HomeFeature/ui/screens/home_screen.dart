@@ -15,13 +15,16 @@ import 'package:aleena/src/ui/widgets/empty_widget.dart';
 import 'package:aleena/src/ui/widgets/scaffold_background.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../ui/widgets/custom_snack_bar.dart';
+import '../../bloc/controller/fetch_regoins_controller.dart';
 import '/src/core/utils/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   Get.put(ChangeNotifyStatusController());
+    // Get.put(FetchRegoinsController());
+    Get.put(ChangeNotifyStatusController());
     RegisterLocationController _registerLocationController =
         Get.put(RegisterLocationController());
     HomeController _homeController = Get.put(HomeController());
@@ -32,10 +35,26 @@ class HomeScreen extends StatelessWidget {
       child: GetBuilder<HomeController>(
         builder: (_) =>  Scaffold(
           drawer: CustomDrawerScreen(),
-          floatingActionButton: _.tabIndex ==0 ? FloatingActionButton(
+          floatingActionButton: _.tabIndex == 0 ?
+          FloatingActionButton(
             onPressed: () {
               // Get.to(()=>AddOrderScreen());
-              _homeController.gotoMap();
+              // if(_.regoinsStatus != RequestStatus.done){
+              if(true){
+                print(_.polyline.length);
+                if(_.polyline.isNotEmpty){
+                  _homeController.gotoMap(polyLines: _.polyline);
+                }else{
+                  customSnackBar(title: "Error_".tr,subtitle:  'لا يوجد مناطق مدرجة اليك حاول مرة اخري');
+                }
+              }else{
+                print('data not found');
+                customSnackBar(title: "Error_".tr,subtitle:  'يتم تحميل المناطق حاول مرة اخري');
+                if(_.regoinsStatus == RequestStatus.error){
+                  print('data not found2');
+                  _.fetchRegoins();
+                }
+              }
             },
             backgroundColor: KCMain,
             child: Center(
@@ -148,6 +167,7 @@ class HomeScreen extends StatelessWidget {
                             onCallTap: () {
                               print("_.onWayDelivery[index].deliveryPhone ${_.onWayDelivery[index].deliveryPhone}");
                               _.launchCall(
+                                  // "tel:+02 ${_.onWayDelivery[index].deliveryPhone}");
                                   "tel:+02 ${_.onWayDelivery[index].deliveryPhone}");
                             },
                           ),
@@ -158,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                               : _.tabIndex == 1
                               ? _.underDelivery.length
                               : _.onWayDelivery.length,
-                          shrinkWrap: true,
+                           shrinkWrap: true,
                         ),
                       ),
                     ),

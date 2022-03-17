@@ -108,6 +108,9 @@ class FetchAndSetCityAndAreaController extends GetxController{
       }
   }
 
+
+  GetStorage box = GetStorage();
+
   SetCityAndAreaRepository _setCityAndAreaRepository = SetCityAndAreaRepository();
   void submit() async{
     if(globalKey.currentState!.validate()){
@@ -118,6 +121,7 @@ class FetchAndSetCityAndAreaController extends GetxController{
       Get.back();
       if (response.statusCode == 200 && response.data["status"] == true) {
         print("request operation success");
+        box.write('WaitingConfirmationScreen',1);
         if(response.data['data']!=null){
           Get.offAll(()=>WaitingConfirmationScreen());
         }

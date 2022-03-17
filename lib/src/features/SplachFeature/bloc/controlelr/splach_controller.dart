@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../AuthFeature/ui/screens/waiting_confirm_screen.dart';
+
 
 
 
@@ -15,16 +17,14 @@ class SplashController extends GetxController{
   @override
   void onInit() {
     super.onInit();
-    // TODO Start Splash Code
-    Timer(Duration(seconds: 3), () {
-      if(box.read('WaitingConfirmationScreen')== 1&&box.read("active")==1){
-
+    Timer(const Duration(seconds: 3), () {
+      if(box.read('WaitingConfirmationScreen')==1){
+        Get.offAll(()=>WaitingConfirmationScreen());
       }
       else if(box.hasData('login')&&box.read("active")==1){
         Get.offAll(()=>HomeScreen());
       }else{
         Get.offAll(()=>LoginScreen());
-        print("aaaaaaaaaaaaaaaaaaaaaaaa");
       }
     });
     update();

@@ -15,13 +15,15 @@ class AddOrderScreen extends StatelessWidget {
   final double? lat;
   final double? lon;
   final String? address;
+  final String fee;
+  final bool inside;
 
 
-  AddOrderScreen({this.lat, this.lon, this.address});
+  AddOrderScreen({this.lat, this.lon, this.address, this.fee = '0',this.inside=true});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(AddOrderController(lat: this.lat,lon: this.lon,address: this.address));
+    Get.put(AddOrderController(lat: this.lat,lon: this.lon,address: this.address,deliveryFee: this.fee,inside:inside ));
     Get.put(HomeController());
     var node = FocusScope.of(context);
     return Scaffold(
@@ -75,7 +77,7 @@ class AddOrderScreen extends StatelessWidget {
                         onTap: () {
                           Get.to(()=>MapScreen(
                             // targetPosition: position,
-                            onSave: (double lat , double lon , String address){
+                            onSave: (double lat , double lon , String address,areaId){
                               _.changeAddress(address);
                               _.changeLat(lat);
                               _.changeLon(lon);
@@ -111,6 +113,18 @@ class AddOrderScreen extends StatelessWidget {
                         controller: _.priceController,
                         keyboardType: TextInputType.number,
                         upperTitle: 'the_required_price'.tr,
+                        // validation: phoneValidator,
+                        onComplete: () {
+                          node.unfocus();
+                        },
+                      ),
+                      16.0.ESH(),
+                      TextFieldDefault(
+                        hint: 'Enter_the_delivery_fee'.tr,
+                        enable: false,
+                        controller: _.deliveryFeeController,
+                        keyboardType: TextInputType.number,
+                        upperTitle: 'delivery_fee'.tr,
                         // validation: phoneValidator,
                         onComplete: () {
                           node.unfocus();

@@ -81,7 +81,7 @@ class _UpdateShopAddressScreenState extends State<UpdateShopAddressScreen> {
                         onTap: () {
                           print("sssssssssss555555555");
                             Get.offAll(()=>MapScreen(
-                              onSave:  (lat, lon, address){
+                              onSave:  (lat, lon, address,areaId){
                                 _updateAddressController.updateAddress(lat: lat,lon: lon,address: address);
                               },
                             ));

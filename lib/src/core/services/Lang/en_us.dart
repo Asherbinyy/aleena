@@ -132,4 +132,6 @@ const Map<String, String> enUS = {
   "recieve_order": "recieve orders",
   "mark_place": "place mark",
   "add_client_address": "add client address",
+  "delivery_fee": "delivery fee",
+  "Enter_the_delivery_fee": "Enter the delivery fee",
 };

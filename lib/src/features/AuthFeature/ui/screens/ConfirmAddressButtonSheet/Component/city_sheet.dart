@@ -55,24 +55,26 @@ class CityButtonSheet extends StatelessWidget {
                   isClose: false,
                 ),
                 24.0.ESH(),
-                ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => InkWell(
-                      onTap: () {
-                        print("xxxxxxxxxxxxxxxxxxxxxxx");
-                        _.setCitySelectedId = cityList[index].id;
-                        _.fetchArea(cityId: cityList[index].id);
-                        _.cityController!.text = cityList[index].title;
-                        Get.back();
-                      },
-                      child: CityOrAreaRowForm(
-                        cityName: cityList[index].title,
-                      )),
-                  separatorBuilder: (context, index) => Divider(
-                    height: 1.5.h,
-                    color: KCTFEnableBorder,
+                Expanded(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                          print("xxxxxxxxxxxxxxxxxxxxxxx");
+                          _.setCitySelectedId = cityList[index].id;
+                          _.fetchArea(cityId: cityList[index].id);
+                          _.cityController!.text = cityList[index].title;
+                          Get.back();
+                        },
+                        child: CityOrAreaRowForm(
+                          cityName: cityList[index].title,
+                        )),
+                    separatorBuilder: (context, index) => Divider(
+                      height: 1.5.h,
+                      color: KCTFEnableBorder,
+                    ),
+                    itemCount: cityList.length,
                   ),
-                  itemCount: cityList.length,
                 ),
               ],
             ),

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1022382935596",
+    "firebase_url": "https://alaynadelivery-default-rtdb.firebaseio.com",
     "project_id": "alaynadelivery",
     "storage_bucket": "alaynadelivery.appspot.com"
   },
@@ -35,6 +36,59 @@
           "android_info": {
             "package_name": "com.alaina.alainadelivery",
             "certificate_hash": "9bb48bfaf372b3361044a51009ed385e3e0afa49"
+          }
+        },
+        {
+          "client_id": "1022382935596-191fvd7egooh0f59gefcfbvadoodkp4s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9jnYzPF8ARIUHmCZLtedQSOrJ-W0tlJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022382935596-191fvd7egooh0f59gefcfbvadoodkp4s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022382935596:android:2dc4bb52555e8603880b89",
+        "android_client_info": {
+          "package_name": "com.aleena.forsanaleena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022382935596-1c4njqj0an8ek1uoaqf7vrc3alaab007.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aleena.forsanaleena",
+            "certificate_hash": "9bb48bfaf372b3361044a51009ed385e3e0afa49"
+          }
+        },
+        {
+          "client_id": "1022382935596-4dc6t1d7tgff592pba71jfvl3b2eo8lb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aleena.forsanaleena",
+            "certificate_hash": "0e03fa1ab49e6c0ababaca412c86e6b4eebab47a"
+          }
+        },
+        {
+          "client_id": "1022382935596-spg2dpfk9dh76vbe29pl2rge4qnjr49j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aleena.forsanaleena",
+            "certificate_hash": "ef4beb120adee81e687bea597cdf34401d82b650"
           }
         },
         {
@@ -95,6 +149,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1022382935596-96offh5c64b08chuuch9cambg48usqrb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crazyidea.alyna.clint",
+            "certificate_hash": "f3a0325714dcf8d469ecaa0ff219697a3ffcd33c"
+          }
+        },
+        {
+          "client_id": "1022382935596-mqk5mll2h7b39d5q9imcjpn7g1ht6p3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crazyidea.alyna.clint",
+            "certificate_hash": "6b8f98a8cec6f54d8ce1d5351a8750fafe8a0402"
+          }
+        },
         {
           "client_id": "1022382935596-rmsh72k76b4iav4uo3tburp0col4darm.apps.googleusercontent.com",
           "client_type": 1,

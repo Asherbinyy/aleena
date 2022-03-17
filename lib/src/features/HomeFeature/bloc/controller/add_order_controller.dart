@@ -17,9 +17,11 @@ class AddOrderController extends GetxController{
    double? lat;
    double? lon;
    String? address;
+   String deliveryFee;
+   bool inside;
 
 
-  AddOrderController({this.lat, this.lon, this.address});
+  AddOrderController({this.lat, this.lon, this.address,this.deliveryFee='0',this.inside=true});
 
   RequestStatus status= RequestStatus.initial;
   TextEditingController? orderNumberController;
@@ -28,6 +30,7 @@ class AddOrderController extends GetxController{
   TextEditingController? addressController;
   TextEditingController? priceController;
   TextEditingController? markController;
+  TextEditingController? deliveryFeeController;
   bool _returnable = false;
 
 
@@ -120,6 +123,12 @@ class AddOrderController extends GetxController{
     addressController = TextEditingController();
     priceController = TextEditingController();
     markController = TextEditingController();
+    deliveryFeeController = TextEditingController();
+
+    if(deliveryFeeController != null){
+      // deliveryFeeController!.text = deliveryFee;
+      deliveryFeeController!.text = '${inside? '':'خارج المناطق المحددة'} ${deliveryFee}';
+    }
     addressController!.text = address??'';
   }
 
@@ -132,6 +141,7 @@ class AddOrderController extends GetxController{
     addressController?.dispose();
     priceController?.dispose();
     markController?.dispose();
+    deliveryFeeController?.dispose();
     super.dispose();
   }
 }

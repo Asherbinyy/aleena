@@ -11,15 +11,15 @@ class LogOutController extends GetxController{
   GetStorage box = GetStorage();
   LogOutRepository _logOutRepository = LogOutRepository();
   void logOut() async{
-      setLoading();
+    box.remove('login');
+    box.remove('token');
+    Get.offAll(LoginScreen());
+      // setLoading();
       status = RequestStatus.loading;
       var response = await _logOutRepository.logOut();
-      Get.back();
+      // Get.back();
       if (response.statusCode == 200 && response.data["status"] == true) {
         print("request operation success");
-        box.remove('login');
-        box.remove('token');
-        Get.offAll(LoginScreen());
         print("convert operation success");
         status = RequestStatus.done;
         update();

@@ -6,12 +6,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
+
+String handlePhone(String phone){
+  if(phone.startsWith('01')||phone.startsWith('1')){
+    return phone.startsWith("0") ? "+2$phone" : "+20$phone";
+  }else{
+    if(phone.startsWith("0")){
+      return phone.replaceFirst('0','+966');
+    }else{
+      return  "+966$phone";
+    }
+  }
+}
+
+
 class PhoneVerifyController{
   static Future<bool?>? verifyPhone({String? phone, Function? onSuccess,bool isRegister = true}) async {
     var _auth = FirebaseAuth.instance;
     setLoading();
     _auth.verifyPhoneNumber(
-      phoneNumber: phone!.startsWith("0")?"+2${phone}":"+20${phone}",
+      phoneNumber: handlePhone(phone!),
       //   phoneNumber: "",
         timeout: Duration(seconds: 60),
         verificationCompleted: (PhoneAuthCredential credential) async {

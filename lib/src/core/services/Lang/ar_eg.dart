@@ -134,4 +134,6 @@ const Map<String, String> arAE = {
   "recieve_order": "استلام المرتجع",
   "mark_place": "علامة مميزة",
   "add_client_address": "ادخل عنوان العميل",
+  "delivery_fee": "رسوم التوصيل",
+  "Enter_the_delivery_fee": "ادخل رسوم التوصيل",
 };

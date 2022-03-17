@@ -47,7 +47,7 @@ class RegisterInfoController extends GetxController{
           box.write('apiToken',response.data['data']['token']);
           print("set Info Down");
           Get.offAll(()=>MapScreen(
-            onSave: (lat, lon, address) {
+            onSave: (lat, lon, address,areaId) {
               registerLocationController.submit(lat: lat,lon: lon,address: address);
               print("set location Down");
             },
@@ -84,7 +84,6 @@ class RegisterInfoController extends GetxController{
       var res = await response.stream.bytesToString();
       var data = jsonDecode(res);
       await box.write("com_reg_num_image", data['data']['com_reg_num_image']);
-      print("com_reg_num_image>>>>>>>>>:-> ${ data['data']['com_reg_num_image']}");
       return ;
     } else if (response.statusCode == 401) {
       return ;

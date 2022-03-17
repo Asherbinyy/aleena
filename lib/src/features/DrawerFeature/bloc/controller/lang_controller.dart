@@ -12,6 +12,7 @@ class LangController extends GetxController{
     _active=value;
     update();
   }
+
   void changeLang(langId){
     if(_active==1){
       LocalizationServices().changeLocale("Arabic");
@@ -28,6 +29,7 @@ class LangController extends GetxController{
     }
     update();
   }
+
   List<langModel> langList = [
     langModel(
       id: 1,
